@@ -51,10 +51,32 @@ Header of the request :
 
 > Bearer {{access token found during authorization}}
 
-URL to call : *https://api.imgur.com/3/account/{{username}}/favorites/{{page}}/{{favoritesSort}}*
+URL to call : *https://api.imgur.com/3/account/{username}/favorites/{page}/{favoritesSort}*
 
-{{page}} : Nb of the page to return, if there are a lot of favorite the API wont return them all at once, you need to make multiple call in order to have all the favorites.
+{page} : Nb of the page to return, if there are a lot of favorite the API wont return them all at once, you need to make multiple call in order to have all the favorites.
 
-{{favoriteSort}} : Is the way to order the results you have the choice between *"oldest"* and *"newest"*.
+{favoriteSort} : Is the way to order the results you have the choice between *"oldest"* and *"newest"*.
+
+{username} : Is the username we got when doing the first step of OAauth2.
 
 Those two parameters are optional.
+
+### **New favorite image**
+
+Header of the request :
+
+> Bearer {{access token found during authorization}}
+
+URL to call : *https://api.imgur.com/3/image/{imageHash}/favorite*
+
+Method : **POST**
+
+{imageHash} : the hash (also called ID) of the image.
+
+### **Remove favorite image**
+
+I did not find any information about this.
+
+
+
+
