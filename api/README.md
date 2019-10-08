@@ -49,7 +49,7 @@ ____
 
 Header of the request :
 
-> Bearer {{access token found during authorization}}
+> Authorization: Bearer {{access token found during authorization}}
 
 URL to call : *https://api.imgur.com/3/account/{username}/favorites/{page}/{favoritesSort}*
 
@@ -65,7 +65,7 @@ Those two parameters are optional.
 
 Header of the request :
 
-> Bearer {{access token found during authorization}}
+> "Authorization: Bearer {{access token found during authorization}}"
 
 URL to call : *https://api.imgur.com/3/image/{imageHash}/favorite*
 
@@ -76,6 +76,71 @@ Method : **POST**
 ### **Remove favorite image**
 
 I did not find any information about this.
+
+
+## User's image
+
+### **Upload image**
+
+Header of the request :
+
+> "Authorization: Client-ID {{client ID}}"
+
+URL to call : https://api.imgur.com/3/upload
+
+Method : **POST**
+
+Body must include :
+
+*image* : The binary file of the image (max 10MB)
+
+or -> *video* : The binary file of the video (max 200MB)
+
+*album* : The id of the album. If no album leave this blank (i think)
+
+*type* : The type of document
+
+*name* : The name of the file, it is supposed to be automatically detected
+
+*title* : The title of the image/video
+
+*description* : The description of the image
+
+*disable_audio* : 1 or 0, 1 to disable the video's audio
+
+### **Update an image information**
+
+Header of the request :
+
+> "Authorization: Bearer {{access token found during authorization}}"
+
+URL to call : *https://api.imgur.com/3/image/{imageHash}
+*
+
+Method : **POST**
+
+{imageHash} : The hash/ID of the image
+
+Body must include :
+
+*title* : The updated Title
+
+*description*: The updated description
+
+
+### **Delete an image**
+
+Header of the request :
+
+> "Authorization: Bearer {{access token found during authorization}}"
+
+URL to call : *https://api.imgur.com/3/image/{imageHash}
+*
+
+Method : **DELETE**
+
+{imageHash} : The hash/ID of the image
+
 
 
 
