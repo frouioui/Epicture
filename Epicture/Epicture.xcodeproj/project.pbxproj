@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3661B73B234C4C410001EACB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661B73A234C4C410001EACB /* ViewController.swift */; };
+		36A462AD234C76F8001EE34E /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A462AC234C76F8001EE34E /* Responses.swift */; };
+		36CC5FBB234BB40800C191C5 /* DrSugiyama-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36CC5FBA234BB40800C191C5 /* DrSugiyama-Regular.ttf */; };
 		4615C6E62342628C00E5C9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C6E52342628C00E5C9EE /* AppDelegate.swift */; };
 		4615C6E82342628C00E5C9EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C6E72342628C00E5C9EE /* SceneDelegate.swift */; };
-		4615C6EA2342628C00E5C9EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C6E92342628C00E5C9EE /* ViewController.swift */; };
 		4615C6ED2342628C00E5C9EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4615C6EB2342628C00E5C9EE /* Main.storyboard */; };
 		4615C6F02342628C00E5C9EE /* Epicture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4615C6EE2342628C00E5C9EE /* Epicture.xcdatamodeld */; };
 		4615C6F22342628E00E5C9EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4615C6F12342628E00E5C9EE /* Assets.xcassets */; };
@@ -36,10 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3661B73A234C4C410001EACB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = /Users/cecile/Projects/Semester5/AppDev/Epicture/Epicture/Epicture/ViewController.swift; sourceTree = "<absolute>"; };
+		36A462AC234C76F8001EE34E /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
+		36CC5FBA234BB40800C191C5 /* DrSugiyama-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DrSugiyama-Regular.ttf"; path = "../../../../../../../Downloads/Dr_Sugiyama/DrSugiyama-Regular.ttf"; sourceTree = "<group>"; };
 		4615C6E22342628C00E5C9EE /* Epicture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epicture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4615C6E52342628C00E5C9EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4615C6E72342628C00E5C9EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4615C6E92342628C00E5C9EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4615C6EC2342628C00E5C9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4615C6EF2342628C00E5C9EE /* Epicture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Epicture.xcdatamodel; sourceTree = "<group>"; };
 		4615C6F12342628E00E5C9EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +82,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36CC5FB9234BB3AA00C191C5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				36CC5FBA234BB40800C191C5 /* DrSugiyama-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		36CC5FBC234BC6F300C191C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				36A462AC234C76F8001EE34E /* Responses.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36CC5FBD234BC70800C191C5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4615C6EB2342628C00E5C9EE /* Main.storyboard */,
+				4615C6F32342628E00E5C9EE /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		36CC5FBE234BC70D00C191C5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3661B73A234C4C410001EACB /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		4615C6D92342628C00E5C9EE = {
 			isa = PBXGroup;
 			children = (
@@ -101,12 +138,13 @@
 		4615C6E42342628C00E5C9EE /* Epicture */ = {
 			isa = PBXGroup;
 			children = (
+				36CC5FBE234BC70D00C191C5 /* Controller */,
+				36CC5FBD234BC70800C191C5 /* View */,
+				36CC5FBC234BC6F300C191C5 /* Model */,
+				36CC5FB9234BB3AA00C191C5 /* Fonts */,
 				4615C6E52342628C00E5C9EE /* AppDelegate.swift */,
 				4615C6E72342628C00E5C9EE /* SceneDelegate.swift */,
-				4615C6E92342628C00E5C9EE /* ViewController.swift */,
-				4615C6EB2342628C00E5C9EE /* Main.storyboard */,
 				4615C6F12342628E00E5C9EE /* Assets.xcassets */,
-				4615C6F32342628E00E5C9EE /* LaunchScreen.storyboard */,
 				4615C6F62342628E00E5C9EE /* Info.plist */,
 				4615C6EE2342628C00E5C9EE /* Epicture.xcdatamodeld */,
 			);
@@ -238,6 +276,7 @@
 				4615C6F52342628E00E5C9EE /* LaunchScreen.storyboard in Resources */,
 				4615C6F22342628E00E5C9EE /* Assets.xcassets in Resources */,
 				4615C6ED2342628C00E5C9EE /* Main.storyboard in Resources */,
+				36CC5FBB234BB40800C191C5 /* DrSugiyama-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,9 +301,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4615C6EA2342628C00E5C9EE /* ViewController.swift in Sources */,
+				36A462AD234C76F8001EE34E /* Responses.swift in Sources */,
 				4615C6E62342628C00E5C9EE /* AppDelegate.swift in Sources */,
 				4615C6F02342628C00E5C9EE /* Epicture.xcdatamodeld in Sources */,
+				3661B73B234C4C410001EACB /* ViewController.swift in Sources */,
 				4615C6E82342628C00E5C9EE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

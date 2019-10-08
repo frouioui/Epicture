@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Epicture.xcodeproj">
+      location = "group:/Users/cecile/Projects/Semester5/AppDev/Epicture/Epicture/Epicture/ViewController.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
