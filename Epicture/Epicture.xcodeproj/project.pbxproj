@@ -40,7 +40,7 @@
 /* Begin PBXFileReference section */
 		3661B73A234C4C410001EACB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Epicture/ViewController.swift; sourceTree = SOURCE_ROOT; };
 		36A462AC234C76F8001EE34E /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Responses.swift; path = Epicture/Model/Responses.swift; sourceTree = SOURCE_ROOT; };
-		36CC5FBA234BB40800C191C5 /* DrSugiyama-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DrSugiyama-Regular.ttf"; path = "../../../../../../../Downloads/Dr_Sugiyama/DrSugiyama-Regular.ttf"; sourceTree = "<group>"; };
+		36CC5FBA234BB40800C191C5 /* DrSugiyama-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DrSugiyama-Regular.ttf"; path = "Epicture/Fonts/DrSugiyama-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		4615C6E22342628C00E5C9EE /* Epicture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epicture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4615C6E52342628C00E5C9EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Epicture/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		4615C6E72342628C00E5C9EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = Epicture/SceneDelegate.swift; sourceTree = SOURCE_ROOT; };
