@@ -1,0 +1,31 @@
+language:
+  - swift
+
+osx_image: xcode11
+
+sudo: required
+
+git:
+  quiet: true
+  depth: false
+
+xcode_project: ./Epicture/Epicture.xcodeproj
+xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11 Pro Max
+
+jobs:
+  include:
+    - stage: build
+      script:
+        - cd Epicture
+        - xcodebuild clean test -project Epicture.xcodeproj -scheme Epicture -destination "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=13.0" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+
+    - stage: deploy
+      if: branch IN (master) AND type != cron AND type != pull_request
+      script:
+        - chmod +x ./ci/deploy.sh
+      deploy:
+        provider: script
+        script: ./ci/deploy.sh
+        on:
+          branch: master
+
