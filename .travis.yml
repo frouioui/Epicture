@@ -20,15 +20,12 @@ jobs:
         - xcodebuild clean test -project Epicture.xcodeproj -scheme Epicture -destination "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=13.0" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
 
     - stage: deploy
+      if: branch IN (master) AND type != cron AND type != pull_request
       script:
-        - chmod +x ./build/deploy.sh
+        - chmod +x ./ci/deploy.sh
       deploy:
         provider: script
-        script: ./build/deploy.sh
+        script: ./ci/deploy.sh
         on:
           branch: master
 
-stage:
-  - build
-  - name: deploy
-    if: branch = master
