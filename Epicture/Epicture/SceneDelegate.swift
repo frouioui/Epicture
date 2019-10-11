@@ -12,6 +12,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    func getQueryStringParameter(url: URL, param: String) -> String? {
+      guard let url = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+      return url.queryItems?.first(where: { $0.name == param })?.value
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        for context in URLContexts {
+            let str = context.url.absoluteString
+            let items =  str.components(separatedBy: "&")
+            for param in items {
+                print(param)
+            }
+        }
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
