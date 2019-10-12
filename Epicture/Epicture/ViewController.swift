@@ -15,6 +15,24 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func testAuth(_ sender: UIButton) {
+        print("test oauth")
+        
+        print(UserDefaults.standard.string(forKey: "refresh_token") as Any)
+        print(UserDefaults.standard.string(forKey: "access_token") as Any)
+        print(UserDefaults.standard.string(forKey: "account_username") as Any)
+        print(UserDefaults.standard.string(forKey: "account_id") as Any)
+    }
+    
+    @IBAction func logout(_ sender: UIButton) {
+        print("logout")
+        
+        UserDefaults.standard.set("", forKey: "refresh_token")
+        UserDefaults.standard.set("", forKey: "access_token")
+        UserDefaults.standard.set("", forKey: "account_username")
+        UserDefaults.standard.set("", forKey: "account_id")
+    }
+    
     //MARK: Actions
     @IBAction func connectWithImgur(_ sender: UIButton) {
         guard let url = URL(string: "https://api.imgur.com/oauth2/authorize?client_id=3aab9940d90a6ac&response_type=token&state=test") else {
