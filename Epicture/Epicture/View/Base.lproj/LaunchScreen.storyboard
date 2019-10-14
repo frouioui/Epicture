@@ -6,11 +6,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="DrSugiyama-Regular.ttf">
-            <string>DrSugiyama-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -20,27 +15,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lwK-Pn-gvm">
-                                <rect key="frame" x="87.5" y="100" width="200" height="365"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="camera.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Rk-uHP">
+                                <rect key="frame" x="53" y="194.5" width="269" height="277"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="fd5-bZ-lpb"/>
+                                    <constraint firstAttribute="height" constant="280" id="9kE-B6-yvj"/>
+                                    <constraint firstAttribute="width" constant="269" id="o5d-gh-wla"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="DrSugiyama-Regular" family="Dr Sugiyama" pointSize="250"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="ultraLight"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lwK-Pn-gvm" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="100" id="SYr-iL-qD5"/>
-                            <constraint firstItem="lwK-Pn-gvm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="y3Y-Vp-mXy"/>
+                            <constraint firstItem="MGE-Rk-uHP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="0pq-VV-Wwp"/>
+                            <constraint firstItem="MGE-Rk-uHP" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="PUp-Zg-jcG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="50.625" y="375"/>
+            <point key="canvasLocation" x="50.399999999999999" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera.viewfinder" catalog="system" width="64" height="58"/>
+    </resources>
 </document>

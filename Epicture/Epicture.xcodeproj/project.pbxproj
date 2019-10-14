@@ -7,7 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3661B73B234C4C410001EACB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661B73A234C4C410001EACB /* ViewController.swift */; };
+		360C137E23510E27003665D5 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 360C137D23510E27003665D5 /* Post.storyboard */; };
+		360C137F23510E27003665D5 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 360C137D23510E27003665D5 /* Post.storyboard */; };
+		360C138023510E27003665D5 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 360C137D23510E27003665D5 /* Post.storyboard */; };
+		360C138823511C48003665D5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C138523511C48003665D5 /* Photo.swift */; };
+		360C138923511FF3003665D5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C138523511C48003665D5 /* Photo.swift */; };
+		360C138A23511FF5003665D5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C138523511C48003665D5 /* Photo.swift */; };
+		361818AD235323CC00EEF686 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361818AB235323CC00EEF686 /* AuthViewController.swift */; };
+		361818AE235323CC00EEF686 /* FeedPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361818AC235323CC00EEF686 /* FeedPhotoViewController.swift */; };
+		361818B0235324C500EEF686 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361818AF235324C500EEF686 /* PhotoCollectionViewCell.swift */; };
+		361818B22353267D00EEF686 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361818B12353267D00EEF686 /* PhotoCollectionViewController.swift */; };
+		365B9D292354483F00F1E10B /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365B9D282354483F00F1E10B /* FeedTableViewController.swift */; };
+		366490002353BC2900925D17 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36648FFF2353BC2900925D17 /* FeedTableViewCell.swift */; };
 		36A462AD234C76F8001EE34E /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A462AC234C76F8001EE34E /* Responses.swift */; };
 		36CC5FBB234BB40800C191C5 /* DrSugiyama-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36CC5FBA234BB40800C191C5 /* DrSugiyama-Regular.ttf */; };
 		4615C6E62342628C00E5C9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C6E52342628C00E5C9EE /* AppDelegate.swift */; };
@@ -38,7 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3661B73A234C4C410001EACB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Epicture/ViewController.swift; sourceTree = SOURCE_ROOT; };
+		360C137D23510E27003665D5 /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
+		360C138523511C48003665D5 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		361818AB235323CC00EEF686 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		361818AC235323CC00EEF686 /* FeedPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPhotoViewController.swift; sourceTree = "<group>"; };
+		361818AF235324C500EEF686 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		361818B12353267D00EEF686 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
+		365B9D282354483F00F1E10B /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
+		36648FFF2353BC2900925D17 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		36A462AC234C76F8001EE34E /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Responses.swift; path = Epicture/Model/Responses.swift; sourceTree = SOURCE_ROOT; };
 		36CC5FBA234BB40800C191C5 /* DrSugiyama-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DrSugiyama-Regular.ttf"; path = "Epicture/Fonts/DrSugiyama-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		4615C6E22342628C00E5C9EE /* Epicture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epicture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				36A462AC234C76F8001EE34E /* Responses.swift */,
+				360C138523511C48003665D5 /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -103,6 +122,7 @@
 			children = (
 				4615C6EB2342628C00E5C9EE /* Main.storyboard */,
 				4615C6F32342628E00E5C9EE /* LaunchScreen.storyboard */,
+				360C137D23510E27003665D5 /* Post.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -110,7 +130,12 @@
 		36CC5FBE234BC70D00C191C5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3661B73A234C4C410001EACB /* ViewController.swift */,
+				361818AB235323CC00EEF686 /* AuthViewController.swift */,
+				361818AF235324C500EEF686 /* PhotoCollectionViewCell.swift */,
+				361818B12353267D00EEF686 /* PhotoCollectionViewController.swift */,
+				361818AC235323CC00EEF686 /* FeedPhotoViewController.swift */,
+				36648FFF2353BC2900925D17 /* FeedTableViewCell.swift */,
+				365B9D282354483F00F1E10B /* FeedTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -273,6 +298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360C137E23510E27003665D5 /* Post.storyboard in Resources */,
 				4615C6F52342628E00E5C9EE /* LaunchScreen.storyboard in Resources */,
 				4615C6F22342628E00E5C9EE /* Assets.xcassets in Resources */,
 				4615C6ED2342628C00E5C9EE /* Main.storyboard in Resources */,
@@ -284,6 +310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360C137F23510E27003665D5 /* Post.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360C138023510E27003665D5 /* Post.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,11 +329,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361818AD235323CC00EEF686 /* AuthViewController.swift in Sources */,
+				361818B0235324C500EEF686 /* PhotoCollectionViewCell.swift in Sources */,
+				360C138923511FF3003665D5 /* Photo.swift in Sources */,
 				36A462AD234C76F8001EE34E /* Responses.swift in Sources */,
+				361818B22353267D00EEF686 /* PhotoCollectionViewController.swift in Sources */,
 				4615C6E62342628C00E5C9EE /* AppDelegate.swift in Sources */,
+				365B9D292354483F00F1E10B /* FeedTableViewController.swift in Sources */,
+				361818AE235323CC00EEF686 /* FeedPhotoViewController.swift in Sources */,
 				4615C6F02342628C00E5C9EE /* Epicture.xcdatamodeld in Sources */,
-				3661B73B234C4C410001EACB /* ViewController.swift in Sources */,
 				4615C6E82342628C00E5C9EE /* SceneDelegate.swift in Sources */,
+				366490002353BC2900925D17 /* FeedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360C138A23511FF5003665D5 /* Photo.swift in Sources */,
 				4615C7002342628E00E5C9EE /* EpictureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360C138823511C48003665D5 /* Photo.swift in Sources */,
 				4615C70B2342628E00E5C9EE /* EpictureUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,13 +517,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7D5HN63228;
+				DEVELOPMENT_TEAM = Q9X5NBY9Q2;
 				INFOPLIST_FILE = Epicture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Florent-Poinsard.Epicture";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cecile.Epicture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -499,13 +535,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7D5HN63228;
+				DEVELOPMENT_TEAM = Q9X5NBY9Q2;
 				INFOPLIST_FILE = Epicture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Florent-Poinsard.Epicture";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cecile.Epicture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
