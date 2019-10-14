@@ -21,9 +21,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         for context in URLContexts {
             let str = context.url.absoluteString
             let items =  str.components(separatedBy: "&")
-            for param in items {
-                print(param)
+            if (items.count != 6 ) {
+                // error, is not the url callback from Imgur's API
+                return
             }
+            
+            let access_token = items[0].components(separatedBy: "#")
+            let refresh_token = items[3].components(separatedBy: "=")
+            let account_username = items[4].components(separatedBy: "=")
+            let account_id = items[5].components(separatedBy: "=")
+            
+            if (access_token.count != 2 || access_token[1].components(separatedBy: "=").count != 2 || access_token[1].components(separatedBy: "=")[0] != "access_token" ||
+                refresh_token.count != 2 || refresh_token[0] != "refresh_token" ||
+                account_username.count != 2 || account_username[0] != "account_username" ||
+                account_id.count != 2 || account_id[0] != "account_id") {
+                
+                // error, is not the url callback from Imgur's API
+                return
+            }
+
+            UserDefaults.standard.set(refresh_token[1], forKey: "refresh_token")
+            UserDefaults.standard.set(access_token[1].components(separatedBy: "=")[1], forKey: "access_token")
+            UserDefaults.standard.set(account_username[1], forKey: "account_username")
+            UserDefaults.standard.set(account_id[1], forKey: "account_id")
         }
     }
 
