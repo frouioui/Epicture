@@ -37,6 +37,9 @@ $ open Epicture/Epicture.xcodeproj
 
 [![test_navigator](https://developer.apple.com/library/archive/documentation/ToolsLanguages/Conceptual/Xcode_Overview/Art/XC_O_about_test_navigator_2x.png)]()
 
+- When a test succeeds, a green diamond	with a checkmark denoting success appears to the right of the test name.
+- When a test fails, a red diamond with an X denoting failure appears to the right of the test name and the issue is displayed in the issue navigator.
+
 ### Break down into end to end tests
 
 Explain what these tests test and why
@@ -67,5 +70,5 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Florent Poinsard ** - [github](https://github.com/frouioui)
-* **Cecile Cadoul ** - [github](https://github.com/Lou31)
+* ** Florent Poinsard ** - [github](https://github.com/frouioui)
+* ** Cecile Cadoul ** - [github](https://github.com/Lou31)
