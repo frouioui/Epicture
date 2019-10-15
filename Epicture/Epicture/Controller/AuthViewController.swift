@@ -17,10 +17,10 @@ class AuthViewController: UIViewController {
     
     //MARK: Actions
     @IBAction func connectWithImgur(_ sender: UIButton) {
-        guard let url = URL(string: "https://api.imgur.com/oauth2/authorize?client_id=3aab9940d90a6ac&response_type=token&state=test") else {
-            return
-        }
-        UIApplication.shared.open(url)
+//        guard let url = URL(string: "https://api.imgur.com/oauth2/authorize?client_id=3aab9940d90a6ac&response_type=token&state=test") else {
+//            return
+//        }
+//        UIApplication.shared.open(url)
 //        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeView") as! FeedViewController
 //

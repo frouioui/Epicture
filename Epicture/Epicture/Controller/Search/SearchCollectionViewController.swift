@@ -158,16 +158,16 @@ class SearchCollectionViewController: UICollectionViewController {
         let image2 = UIImage(named: "photo2")
         let image3 = UIImage(named: "photo3")
 
-        guard let photo1 = Photo(author: "Anais", photo: image1, comment: "Caprese Salad", favorite: true) else {
+        guard let photo1 = Photo(author: "Anais", photo: image1, title: "Caprese Salad", comment: "blablabla", favorite: true) else {
             fatalError("Unable to instantiate photo1")
         }
 
-        guard let photo2 = Photo(author: "James", photo: image2, comment: "Chicken and Potatoes") else {
-            fatalError("Unable to instantiate meal2")
+        guard let photo2 = Photo(author: "James", photo: image2, title: "Chicken and Potatoes", comment: "blabla") else {
+            fatalError("Unable to instantiate photo2")
         }
 
-        guard let photo3 = Photo(author: "Emelia", photo: image3, comment: "Pasta with Meatballs") else {
-            fatalError("Unable to instantiate meal2")
+        guard let photo3 = Photo(author: "Emelia", photo: image3, title: "Pasta with Meatballs", comment: "blablabla") else {
+            fatalError("Unable to instantiate photo3")
         }
 
         photos += [photo1, photo2, photo3]
@@ -175,7 +175,7 @@ class SearchCollectionViewController: UICollectionViewController {
 
     private func filterContentForSearchText(_ searchText: String) {
       filteredPhotos = photos.filter { (photo: Photo) -> Bool in
-        return photo.comment.lowercased().contains(searchText.lowercased())
+        return photo.title.lowercased().contains(searchText.lowercased())
       }
       
         collectionView.reloadData()

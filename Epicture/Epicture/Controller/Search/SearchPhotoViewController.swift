@@ -12,6 +12,7 @@ class SearchPhotoViewController: UIViewController {
 
     //MARK: Properties
     @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -26,6 +27,7 @@ class SearchPhotoViewController: UIViewController {
         }
         navigationItem.title = photo.author
         authorLabel.text = photo.author
+        titleLabel.text = photo.title
         commentLabel.text = photo.comment
         photoImageView.image = photo.photo
         if photo.favorite {
@@ -35,22 +37,8 @@ class SearchPhotoViewController: UIViewController {
     }
     
     //MARK: Actions
-    @IBAction func handleDoubleTap(_ sender: UITapGestureRecognizer) {
-        //MARK: TODO Add to Favorites if double tap
-        guard let photo = photo else {
-            return
-        }
-        navigationItem.title = photo.author
-        authorLabel.text = photo.author
-        commentLabel.text = photo.comment
-        photoImageView.image = photo.photo
-        if photo.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            favoriteButton.tintColor = UIColor.red
-        }
-    }
-    
     @IBAction func manageFavorite(_ sender: UIButton) {
+        //MARK: TODO Add to Favorite
         guard let photo = photo else {
             return
         }

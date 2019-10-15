@@ -1,21 +1,21 @@
 //
-//  FeedTableViewController.swift
+//  FavoriteTableViewController.swift
 //  Epicture
 //
-//  Created by Cecile on 14/10/2019.
+//  Created by Cecile on 15/10/2019.
 //  Copyright © 2019 Florent Poinsard. All rights reserved.
 //
 
 import UIKit
 
-extension FeedTableViewController: UISearchResultsUpdating {
+extension FavoriteTableViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     let searchBar = searchController.searchBar
     filterContentForSearchText(searchBar.text!)
   }
 }
 
-class FeedTableViewController: UITableViewController {
+class FavoriteTableViewController: UITableViewController {
 
     //MARK: Properties
     var photos = [Photo]()
@@ -30,7 +30,7 @@ class FeedTableViewController: UITableViewController {
     var isFiltering: Bool {
       return searchController.isActive && !isSearchBarEmpty
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,7 +42,7 @@ class FeedTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
-
+    
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -53,10 +53,12 @@ class FeedTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
         if isFiltering {
             return filteredPhotos.count
         }
@@ -66,10 +68,10 @@ class FeedTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Table view cells are reused and should be dequeued using a cell identifier.
-        let cellIdentifier = "FeedTableViewCell"
+        let cellIdentifier = "FavoriteTableViewCell"
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FeedTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of PhotoTableViewCell.")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FavoriteTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of FavoriteTableViewCell.")
         }
         
         // Fetches the appropriate meal for the data source layout.
@@ -80,6 +82,7 @@ class FeedTableViewController: UITableViewController {
             photo = photos[indexPath.row]
         }
         
+        cell.authorLabel.text = photo.author
         cell.titleLabel.text = photo.title
         cell.photoImageView.image = photo.photo
         cell.commentLabel.text = photo.comment
@@ -138,12 +141,12 @@ class FeedTableViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         switch segue.identifier ?? "" {
-        case "FeedShowDetail":
-            guard let feedDetailViewController = segue.destination as? FeedPhotoViewController else {
+        case "FavoriteShowDetail":
+            guard let favoriteDetailViewController = segue.destination as? FavoritePhotoViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
              
-            guard let selectedFeedCell = sender as? FeedTableViewCell else {
+            guard let selectedFeedCell = sender as? FavoriteTableViewCell else {
                 fatalError("Unexpected sender: \(String(describing: sender))")
             }
              
@@ -158,13 +161,12 @@ class FeedTableViewController: UITableViewController {
             } else {
                 selectedPhoto = photos[indexPath.row]
             }
-            feedDetailViewController.photo = selectedPhoto
+            favoriteDetailViewController.photo = selectedPhoto
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
-        
     }
-    
+
     //MARK: Private Methods
     private func loadSamplePhotos() {
         

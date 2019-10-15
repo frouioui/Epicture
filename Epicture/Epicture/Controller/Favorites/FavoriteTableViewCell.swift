@@ -1,16 +1,17 @@
 //
-//  FeedTableViewCell.swift
+//  FavoriteTableViewCell.swift
 //  Epicture
 //
-//  Created by Cecile on 13/10/2019.
+//  Created by Cecile on 15/10/2019.
 //  Copyright © 2019 Florent Poinsard. All rights reserved.
 //
 
 import UIKit
 
-class FeedTableViewCell: UITableViewCell {
+class FavoriteTableViewCell: UITableViewCell {
 
     //MARK: Properties
+    @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var commentLabel: UILabel!
