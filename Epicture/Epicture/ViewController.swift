@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         let client = ImgurAPIClient()
 
         do {
-            let avatar_url = try client.getAvatar(username: UserDefaults.standard.string(forKey: "account_username")!)
+            let avatar_url = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
             print(avatar_url)
         } catch let err {
             print(err)
