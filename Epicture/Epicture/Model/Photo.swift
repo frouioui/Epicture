@@ -14,10 +14,11 @@ class Photo {
     var author: String
     var photo: UIImage?
     var comment: String
+    var favorite: Bool
     
     //MARK: Initialization
     
-    init?(author: String, photo: UIImage?, comment: String) {
+    init?(author: String, photo: UIImage?, comment: String, favorite: Bool = false) {
 
         if author.isEmpty || comment.isEmpty {
             return nil
@@ -26,6 +27,7 @@ class Photo {
         self.author = author
         self.photo = photo
         self.comment = comment
+        self.favorite = favorite
     }
 }
 

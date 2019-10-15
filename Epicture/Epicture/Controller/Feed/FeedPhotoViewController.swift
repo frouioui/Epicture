@@ -11,31 +11,59 @@ import UIKit
 class FeedPhotoViewController: UIViewController {
     
     //MARK: Properties
-
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var photo: Photo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let photo = photo {
-            navigationItem.title = photo.author
-            authorLabel.text = photo.author
-            commentLabel.text = photo.comment
-            photoImageView.image = photo.photo
+        guard let photo = photo else {
+            return
+        }
+        navigationItem.title = photo.author
+        authorLabel.text = photo.author
+        commentLabel.text = photo.comment
+        photoImageView.image = photo.photo
+        if photo.favorite {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.red
         }
     }
 
     //MARK: Actions
     @IBAction func addPhotoToFavorites(_ sender: UITapGestureRecognizer) {
         //MARK: TODO Add to Favorites if double tap
+        guard let photo = photo else {
+            return
+        }
+        navigationItem.title = photo.author
+        authorLabel.text = photo.author
+        commentLabel.text = photo.comment
+        photoImageView.image = photo.photo
+        if photo.favorite {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.red
+        }
     }
     
     @IBAction func addToFavorite(_ sender: UIButton) {
         //MARK: TODO Add to Favorites
+        guard let photo = photo else {
+            return
+        }
+        if photo.favorite {
+            photo.favorite = false
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.tintColor = UIColor.label
+        } else {
+            photo.favorite = true
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.red
+        }
     }
 
     

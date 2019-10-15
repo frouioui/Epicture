@@ -1,0 +1,78 @@
+//
+//  SearchPhotoViewController.swift
+//  Epicture
+//
+//  Created by Cecile on 15/10/2019.
+//  Copyright © 2019 Florent Poinsard. All rights reserved.
+//
+
+import UIKit
+
+class SearchPhotoViewController: UIViewController {
+
+    //MARK: Properties
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    var photo: Photo?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        guard let photo = photo else {
+            return
+        }
+        navigationItem.title = photo.author
+        authorLabel.text = photo.author
+        commentLabel.text = photo.comment
+        photoImageView.image = photo.photo
+        if photo.favorite {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.red
+        }
+    }
+    
+    //MARK: Actions
+    @IBAction func handleDoubleTap(_ sender: UITapGestureRecognizer) {
+        //MARK: TODO Add to Favorites if double tap
+        guard let photo = photo else {
+            return
+        }
+        navigationItem.title = photo.author
+        authorLabel.text = photo.author
+        commentLabel.text = photo.comment
+        photoImageView.image = photo.photo
+        if photo.favorite {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.red
+        }
+    }
+    
+    @IBAction func manageFavorite(_ sender: UIButton) {
+        guard let photo = photo else {
+            return
+        }
+        if photo.favorite {
+            photo.favorite = false
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.tintColor = UIColor.label
+        } else {
+            photo.favorite = true
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.red
+        }
+    }
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

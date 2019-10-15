@@ -8,16 +8,40 @@
 
 import UIKit
 
+extension FeedTableViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    let searchBar = searchController.searchBar
+    filterContentForSearchText(searchBar.text!)
+  }
+}
+
 class FeedTableViewController: UITableViewController {
 
     //MARK: Properties
     var photos = [Photo]()
+    var filteredPhotos: [Photo] = []
+
+    let searchController = UISearchController(searchResultsController: nil)
+
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Load the sample data.
         loadSamplePhotos()
+
+        // Add Search Controller in Navigation Bar
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,6 +57,9 @@ class FeedTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredPhotos.count
+        }
         return photos.count
     }
 
@@ -46,11 +73,20 @@ class FeedTableViewController: UITableViewController {
         }
         
         // Fetches the appropriate meal for the data source layout.
-        let photo = photos[indexPath.row]
+        let photo: Photo
+        if isFiltering {
+            photo = filteredPhotos[indexPath.row]
+        } else {
+            photo = photos[indexPath.row]
+        }
         
         cell.authorLabel.text = photo.author
         cell.photoImageView.image = photo.photo
         cell.commentLabel.text = photo.comment
+        if photo.favorite {
+            cell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            cell.favoriteButton.tintColor = UIColor.red
+        }
         
         return cell
     }
@@ -99,7 +135,7 @@ class FeedTableViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         switch segue.identifier ?? "" {
-        case "ShowDetail":
+        case "FeedShowDetail":
             guard let feedDetailViewController = segue.destination as? FeedPhotoViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
@@ -111,8 +147,14 @@ class FeedTableViewController: UITableViewController {
             guard let indexPath = tableView.indexPath(for: selectedFeedCell) else {
                 fatalError("The selected cell is not being displayed by the table")
             }
-             
-            let selectedPhoto = photos[indexPath.row]
+
+            let selectedPhoto: Photo
+
+            if isFiltering {
+                selectedPhoto = filteredPhotos[indexPath.row]
+            } else {
+                selectedPhoto = photos[indexPath.row]
+            }
             feedDetailViewController.photo = selectedPhoto
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
@@ -127,7 +169,7 @@ class FeedTableViewController: UITableViewController {
         let image2 = UIImage(named: "photo2")
         let image3 = UIImage(named: "photo3")
         
-        guard let photo1 = Photo(author: "Anais", photo: image1, comment: "Caprese Salad") else {
+        guard let photo1 = Photo(author: "Anais", photo: image1, comment: "Caprese Salad", favorite: true) else {
             fatalError("Unable to instantiate photo1")
         }
         
@@ -142,4 +184,11 @@ class FeedTableViewController: UITableViewController {
         photos += [photo1, photo2, photo3]
     }
 
+    private func filterContentForSearchText(_ searchText: String) {
+      filteredPhotos = photos.filter { (photo: Photo) -> Bool in
+        return photo.comment.lowercased().contains(searchText.lowercased())
+      }
+      
+      tableView.reloadData()
+    }
 }

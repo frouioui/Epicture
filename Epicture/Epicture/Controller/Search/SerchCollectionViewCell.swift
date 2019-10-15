@@ -1,5 +1,5 @@
 //
-//  PhotoCollectionViewCell.swift
+//  SearchCollectionViewCell.swift
 //  Epicture
 //
 //  Created by Cecile on 13/10/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoCollectionViewCell: UICollectionViewCell {
+class SearchCollectionViewCell: UICollectionViewCell {
 
     //MARK: Properties
     @IBOutlet weak var photoImageView: UIImageView!
