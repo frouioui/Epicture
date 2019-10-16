@@ -33,12 +33,25 @@ class ViewController: UIViewController {
         UserDefaults.standard.set("", forKey: "account_id")
     }
     
+    @IBAction func getAvatar(_ sender: UIButton) {
+        print("get avatar")
+        let client = ImgurAPIClient()
+
+        do {
+            let avatar_url = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
+            print(avatar_url)
+        } catch let err {
+            print(err)
+        }
+    }
+    
     //MARK: Actions
     @IBAction func connectWithImgur(_ sender: UIButton) {
-        guard let url = URL(string: "https://api.imgur.com/oauth2/authorize?client_id=3aab9940d90a6ac&response_type=token&state=test") else {
-                return
-            }
-            UIApplication.shared.open(url)
+        let client = ImgurAPIClient()
+        guard let url = URL(string: "https://api.imgur.com/oauth2/authorize?client_id=" + client.ClientID + "&response_type=token&state=test") else {
+            return
+        }
+        UIApplication.shared.open(url)
     }
     
 }
