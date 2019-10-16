@@ -9,13 +9,14 @@ We chose to develop our application in Swift for the following reasons:
 - A native app allows quality graphics effects
 - Offers more security
 - Offers the best user experience (UX)
-- It allows easier access to all the features of the phone, the accelerometer through the camera and even the microphone.
+- It allows easier access to all the features of the phone, the accelerometer through the camera and even the microphone
 - Active developer community
 - Many sources of documentation
 
 ## API Imgur usage
 You can find more information about it [here](./api/README.md).
 
+---
 
 ## Getting Started
 
@@ -76,9 +77,11 @@ Add additional notes about how to deploy this on a live system
 - Clicking the Stop button causes the app to quit.
 [![build_app_scheme](https://developer.apple.com/library/archive/documentation/ToolsLanguages/Conceptual/Xcode_Overview/Art/XC_O_SchemeMenuWithCallouts_2x.png)]()
 
+---
+
 ## Documentation
 
-###Storyboard
+### Storyboard
 
 - Uncompress the files first
 
@@ -104,7 +107,7 @@ $ open Epicture.sketch
 
 ### Architectural documentation
 
-You can find the architectural documentation [here]
+You can find the architectural documentation [here]()
 
 ## Authors
 
