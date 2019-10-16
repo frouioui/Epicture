@@ -21,11 +21,15 @@ class AuthViewController: UIViewController {
 //            return
 //        }
 //        UIApplication.shared.open(url)
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeView") as! FeedViewController
-//
-//        homeViewController.modalPresentationStyle = .fullScreen
-//        self.present(homeViewController, animated: false, completion: nil)
+        openTabBarController()
+    }
+    //MARK: Private function
+    private func openTabBarController() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+
+        mainTabBarController.modalPresentationStyle = .fullScreen
+        self.present(mainTabBarController, animated: false, completion: nil)
     }
     
 }

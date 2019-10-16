@@ -74,7 +74,7 @@ class FavoriteTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of FavoriteTableViewCell.")
         }
         
-        // Fetches the appropriate meal for the data source layout.
+        // Fetches the appropriate photo for the data source layout.
         let photo: Photo
         if isFiltering {
             photo = filteredPhotos[indexPath.row]
@@ -146,11 +146,11 @@ class FavoriteTableViewController: UITableViewController {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
              
-            guard let selectedFeedCell = sender as? FavoriteTableViewCell else {
+            guard let selectedFavoriteCell = sender as? FavoriteTableViewCell else {
                 fatalError("Unexpected sender: \(String(describing: sender))")
             }
              
-            guard let indexPath = tableView.indexPath(for: selectedFeedCell) else {
+            guard let indexPath = tableView.indexPath(for: selectedFavoriteCell) else {
                 fatalError("The selected cell is not being displayed by the table")
             }
 
