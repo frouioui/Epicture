@@ -89,20 +89,20 @@ Add additional notes about how to deploy this on a live system
 $ tar -xzvf Storyboard/Storyboard_sketch.tar.gz
 $ tar -xzvf Storyboard/Storyboard_pdf.tar.gz
 ```
-- Open the PDF file
+- Open the PDF storyboard
 
 ```
-$ open Epicture.pdf
+$ open Storyboard/Epicture.pdf
 ```
 
 > Only on MacOS
 
-- To open the Epicture.sketch file, you must first install [Sketch](https://www.sketch.com/)
+- To open the `Epicture.sketch` file, you must first install [Sketch](https://www.sketch.com/)
 
-- Open the Sketch file
+- Open the Sketch storyboard
 
 ```
-$ open Epicture.sketch
+$ open Storyboard/Epicture.sketch
 ```
 
 ### Architectural documentation
