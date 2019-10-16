@@ -2,6 +2,17 @@
 
 Photo finder and browsing application the following platform: Imgur.
 
+## Technologie choice
+
+
+We chose to develop our application in Swift for the following reasons:
+- A native app allows quality graphics effects
+- Offers more security
+- Offers the best user experience (UX)
+- It allows easier access to all the features of the phone, the accelerometer through the camera and even the microphone.
+- Active developer community
+- Many sources of documentation
+
 ## API Imgur usage
 You can find more information about it [here](./api/README.md).
 
@@ -21,7 +32,7 @@ Clone this repo to your local machine
 $ git clone https://github.com/frouioui/Epicture.git
 ```
 
-### Installing
+### Open the project
 
 Move to the project folder and open the xcode project:
 
@@ -67,8 +78,35 @@ Add additional notes about how to deploy this on a live system
 
 ## Documentation
 
+###Storyboard
+
+- Uncompress the files first
+
+```
+$ tar -xzvf Storyboard/Storyboard_sketch.tar.gz
+$ tar -xzvf Storyboard/Storyboard_pdf.tar.gz
+```
+- Open the PDF file
+
+```
+$ open Epicture.pdf
+```
+
+> Only on MacOS
+
+- To open the Epicture.sketch file, you must first install [Sketch](https://www.sketch.com/)
+
+- Open the Sketch file
+
+```
+$ open Epicture.sketch
+```
+
+### Architectural documentation
+
+You can find the architectural documentation [here]
 
 ## Authors
 
-* ** Florent Poinsard ** - [github](https://github.com/frouioui)
-* ** Cecile Cadoul ** - [github](https://github.com/Lou31)
+* **Florent Poinsard** - [github](https://github.com/frouioui)
+* **Cecile Cadoul** - [github](https://github.com/Lou31)
