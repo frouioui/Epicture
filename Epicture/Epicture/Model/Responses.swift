@@ -94,6 +94,14 @@ public class ImgurAPIClient {
         case apiError
     }
     
+    enum SortSearch : String {
+        case day
+        case week
+        case month
+        case year
+        case all
+    }
+    
     //MARK: setAuthBearerHeader
     private func setAuthBearerHeader(urlRequest: inout URLRequest) throws {
         let access_token = UserDefaults.standard.string(forKey: "access_token")
@@ -337,12 +345,12 @@ public class ImgurAPIClient {
     }
 
     //MARK: fetchOneSearch
-    private func fetchOneSearch(searchKey: String, filter: String, page: Int) throws -> [FavoriteResponse.Favorite] {
+    private func fetchOneSearch(searchKey: String, filter: SortSearch, page: Int) throws -> [FavoriteResponse.Favorite] {
         let session = URLSession.shared
         var imgSearch = [FavoriteResponse.Favorite]()
         var done = false
           
-        guard let url = URL(string: "https://api.imgur.com/3/gallery/search/top/\(filter)/\(page)?q="+searchKey) else {
+        guard let url = URL(string: "https://api.imgur.com/3/gallery/search/top/\(filter.rawValue)/\(page)?q="+searchKey) else {
             throw ImgurError.invalidURL
         }
 
@@ -385,10 +393,10 @@ public class ImgurAPIClient {
     }
     
     //MARK: getSearchResult
-    func getSearchResult(username: String, keywords: [String], sort: String) throws -> [Post] {
+    func getSearchResult(username: String, keywords: [String], sort: SortSearch) throws -> [Post] {
         var sortkey = sort
-        if sortkey != "day" && sortkey != "week" && sortkey != "month" && sortkey != "year" {
-            sortkey = "all"
+        if sortkey != SortSearch.day && sortkey != SortSearch.week && sortkey != SortSearch.month && sortkey != SortSearch.year {
+            sortkey = SortSearch.all
         }
         var posts = [Post]()
         let searchKey = self.transformSearchKeys(keywords: keywords)
