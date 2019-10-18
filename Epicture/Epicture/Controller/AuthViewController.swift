@@ -16,35 +16,32 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func testAuth(_ sender: UIButton) {
-                print(UserDefaults.standard.string(forKey: "refresh_token") as Any)
-                print(UserDefaults.standard.string(forKey: "access_token") as Any)
-                print(UserDefaults.standard.string(forKey: "account_username") as Any)
-                print(UserDefaults.standard.string(forKey: "account_id") as Any)
+        print(UserDefaults.standard.string(forKey: "refresh_token") as Any)
+        print(UserDefaults.standard.string(forKey: "access_token") as Any)
+        print(UserDefaults.standard.string(forKey: "account_username") as Any)
+        print(UserDefaults.standard.string(forKey: "account_id") as Any)
     }
-
-
     
     @IBAction func logout(_ sender: UIButton) {
-                UserDefaults.standard.set("", forKey: "refresh_token")
-                UserDefaults.standard.set("", forKey: "access_token")
-                UserDefaults.standard.set("", forKey: "account_username")
-                UserDefaults.standard.set("", forKey: "account_id")
+        UserDefaults.standard.set("", forKey: "refresh_token")
+        UserDefaults.standard.set("", forKey: "access_token")
+        UserDefaults.standard.set("", forKey: "account_username")
+        UserDefaults.standard.set("", forKey: "account_id")
     }
     
     @IBAction func testAPI(_ sender: UIButton) {
-                print("get avatar")
-                let client = ImgurAPIClient()
-        
-                do {
-                    let avatar_url = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
-                    print(avatar_url)
-                } catch let err {
-                    print(err)
-                }
+        print("get avatar")
+        let client = ImgurAPIClient()
+
+        do {
+            let avatar_url = try client.getSearchResult(username:  UserDefaults.standard.string(forKey: "account_username")!, keywords: ["cats"], sort: ImgurAPIClient.SortSearch.day)
+            print(avatar_url)
+        } catch let err {
+            print(err)
+        }
         
     }
-    
-    
+
     //MARK: Actions
     @IBAction func connectWithImgur(_ sender: UIButton) {
         let client = ImgurAPIClient()
