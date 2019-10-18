@@ -72,6 +72,27 @@ struct FavoriteResponse: Codable {
     var data: [Favorite]
 }
 
+struct ErrorResponse: Codable {
+    init() {
+        error = ""
+    }
+    var error: String
+}
+
+struct FavoriteAlbumManageResponseError: Codable {
+    init() {
+        data = ErrorResponse()
+    }
+    var data: ErrorResponse
+}
+
+struct FavoriteAlbumManageResponse: Codable {
+    init() {
+        data = ""
+    }
+    var data: String
+}
+
 //MARK: Avatar
 struct AvatarResponse: Codable {
     struct Avatar: Codable {
@@ -157,7 +178,7 @@ public class ImgurAPIClient {
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
+                (200...299).contains(httpResponse.statusCode) else {
                 self.handleAPIError(resp: response!)
                 return
             }
@@ -420,4 +441,99 @@ public class ImgurAPIClient {
         return posts
     }
     
+    //MARK: favoriteOneAlbum
+    private func favoriteOneAlbum(postId: String) throws -> Bool {
+        let session = URLSession.shared
+        var ok = false
+        var done = false
+          
+        guard let url = URL(string: "https://api.imgur.com/3/album/" + postId + "/favorite") else {
+            throw ImgurError.invalidURL
+        }
+
+        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval:100)
+        urlRequest.httpMethod = "POST"
+
+        try self.setAuthBearerHeader(urlRequest: &urlRequest)
+          
+        let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
+            if error != nil || data == nil {
+                self.handleClientError(err: error!)
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) || httpResponse.statusCode == 404 else{
+                self.handleAPIError(resp: response!)
+                return
+            }
+            guard let mime = response?.mimeType, mime == "application/json" else {
+                print("Wrong MIME type!")
+                return
+            }
+
+            do {
+                _ = try JSONDecoder().decode(FavoriteAlbumManageResponse.self, from: data!)
+                ok = true
+            } catch {
+                print("error: this ID is not an album, instead try the favoriteOnePicture function")
+                ok = false
+            }
+            done = true
+        })
+        task.resume()
+        while (done == false) {}
+        return ok
+    }
+    
+    //MARK: favoriteOnePicture
+    private func favoriteOnePicture(imageId: String) throws -> Bool {
+        let session = URLSession.shared
+        var ok = false
+        var done = false
+          
+        guard let url = URL(string: "https://api.imgur.com/3/image/" + imageId + "/favorite") else {
+            throw ImgurError.invalidURL
+        }
+
+        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval:100)
+        urlRequest.httpMethod = "POST"
+
+        try self.setAuthBearerHeader(urlRequest: &urlRequest)
+          
+        let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
+            if error != nil || data == nil {
+                self.handleClientError(err: error!)
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) || httpResponse.statusCode == 404 else{
+                self.handleAPIError(resp: response!)
+                return
+            }
+            guard let mime = response?.mimeType, mime == "application/json" else {
+                print("Wrong MIME type!")
+                return
+            }
+
+            do {
+                _ = try JSONDecoder().decode(FavoriteAlbumManageResponse.self, from: data!)
+                ok = true
+            } catch {
+                print("error, not a picture, try the favoriteOneAlbum function")
+                ok = false
+            }
+            done = true
+        })
+        task.resume()
+        while (done == false) {}
+        return ok
+    }
+    
+    //MARK: manageThisFavorite
+    func manageThisFavorite(id: String) throws -> Bool {
+        var fav = try self.favoriteOneAlbum(postId: id)
+        if fav == false {
+            fav = try self.favoriteOnePicture(imageId: id)
+        }
+        print(fav)
+        return fav
+    }
 }
