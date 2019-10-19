@@ -94,7 +94,11 @@ class FeedTableViewController: UITableViewController {
                 print("[MyFeed] - A problem occured on url conversion")
                 return
             }
-            if post.image.type!.contains("image/jpg") || post.image.type!.contains("image/jpeg") {
+            guard let type = post.image.type else {
+                print("[MyFedd] - Empty image type")
+                return
+            }
+            if type.contains("image/jpg") || type.contains("image/jpeg") {
                 guard let data = try? Data(contentsOf: url) else {
                     print("[MyFeed] - A problem occured on data conversion")
                     return
@@ -117,7 +121,7 @@ class FeedTableViewController: UITableViewController {
                     imageView.frame = cell.postView.bounds
                     cell.postView.addSubview(self.imageView!)
                 }
-            } else if post.image.type!.contains("/mp4") || post.image.type!.contains("/avi") {
+            } else if type.contains("/mp4") || type.contains("/avi") {
                 DispatchQueue.main.async {
                     self.player = AVPlayer(url: url)
                     guard let player = self.player else {

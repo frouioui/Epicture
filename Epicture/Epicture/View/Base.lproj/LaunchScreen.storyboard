@@ -15,8 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="camera.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Rk-uHP">
-                                <rect key="frame" x="53" y="194.5" width="269" height="277"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="camera.viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Rk-uHP">
+                                <rect key="frame" x="53" y="195" width="269" height="277"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="9kE-B6-yvj"/>
