@@ -94,7 +94,11 @@ class FavoriteTableViewController: UITableViewController {
                 print("[Favorites] - A problem occured on url conversion")
                 return
             }
-            if post.image.type!.contains("image/jpg") || post.image.type!.contains("image/jpeg") {
+            guard let type = post.image.type else {
+                print("[Favorites] - Empty image type")
+                return
+            }
+            if type.contains("image/jpg") || type.contains("image/jpeg") {
                 guard let data = try? Data(contentsOf: url) else {
                     print("[Favorites] - A problem occured on data conversion")
                     return
@@ -117,16 +121,13 @@ class FavoriteTableViewController: UITableViewController {
                     imageView.frame = cell.postView.bounds
                     cell.postView.addSubview(self.imageView!)
                 }
-            } else if post.image.type!.contains("/mp4") || post.image.type!.contains("/avi") {
+            } else if type.contains("/mp4") || type.contains("/avi") {
                 DispatchQueue.main.async {
                     self.player = AVPlayer(url: url)
                     guard let player = self.player else {
                         print("[Favorites] - A problem occured on video loading")
                         return
                     }
-//                    if self.playerLayer != nil {
-//                        self.playerLayer?.removeFromSuperlayer()
-//                    }
                     self.playerLayer = AVPlayerLayer(player: player)
                     guard let playerLayer = self.playerLayer else {
                         print("[Favorites] - A problem occured on playerlayer loading")
@@ -139,7 +140,6 @@ class FavoriteTableViewController: UITableViewController {
                 }
             }
         }
-
         return cell
     }
 

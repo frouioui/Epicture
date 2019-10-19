@@ -11,8 +11,12 @@ import UIKit
 func loadFavoriteFromImgur() {
     let client = ImgurAPIClient()
 
+    guard let username = UserDefaults.standard.string(forKey: "account_username") else {
+        print("[loadFavoriteFromImgur] - Empty username")
+        return
+    }
     do {
-        favoritePosts = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
+        favoritePosts = try client.getFavorites(username: username)
     } catch let err {
         print(err)
     }
@@ -21,8 +25,12 @@ func loadFavoriteFromImgur() {
 func loadUserFeedFromImgur() {
     let client = ImgurAPIClient()
 
+    guard let username = UserDefaults.standard.string(forKey: "account_username") else {
+        print("[loadUserFeedFromImgur] - Empty username")
+        return
+    }
     do {
-        userPosts = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
+        userPosts = try client.getUserImage(username: username)
     } catch let err {
         print(err)
     }

@@ -34,7 +34,11 @@ class FeedPhotoViewController: UIViewController {
         commentLabel.text = post.image.description
     
         DispatchQueue.global(qos: .userInteractive).async {
-            if post.image.type!.contains("image/jpg") || post.image.type!.contains("image/jpeg") {
+            guard let type = post.image.type else {
+                print("[MyFeedPhoto] - Empty image type")
+                return
+            }
+            if type.contains("image/jpg") || type.contains("image/jpeg") {
                 guard let image = self.image else {
                     print("[MyFeedPhoto] - A problem occured on image transfert")
                     return
@@ -45,7 +49,7 @@ class FeedPhotoViewController: UIViewController {
                     imageView.frame = self.postView.bounds
                     self.postView.addSubview(imageView)
                 }
-            } else if post.image.type!.contains("/mp4") || post.image.type!.contains("/avi") {
+            } else if type.contains("/mp4") || type.contains("/avi") {
                 guard let player = self.player else {
                     print("[MyFeedPhoto] - A problem occured on video transfert")
                     return
