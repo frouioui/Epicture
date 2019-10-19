@@ -21,7 +21,7 @@ var favoritePosts: [Post] = []
 class FavoriteTableViewController: UITableViewController {
 
     //MARK: Properties
-    var posts: [Post] = []
+//    var posts: [Post] = []
     var filteredPosts: [Post] = []
 
     var imageView: UIImageView?
@@ -42,7 +42,7 @@ class FavoriteTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        posts = favoritePosts
+//        posts = favoritePosts
 
         // MARK: Add Search Controller
         searchController.searchResultsUpdater = self
@@ -79,7 +79,7 @@ class FavoriteTableViewController: UITableViewController {
         if isFiltering {
             post = filteredPosts[indexPath.row]
         } else {
-            post = posts[indexPath.row]
+            post = favoritePosts[indexPath.row]
         }
         cell.authorLabel.text = post.image.account_url
         cell.titleLabel.text = post.image.title
@@ -168,7 +168,7 @@ class FavoriteTableViewController: UITableViewController {
             if isFiltering {
                 selectedPost = filteredPosts[indexPath.row]
             } else {
-                selectedPost = posts[indexPath.row]
+                selectedPost = favoritePosts[indexPath.row]
             }
             favoriteDetailViewController.post = selectedPost
             favoriteDetailViewController.image = self.image
@@ -180,7 +180,7 @@ class FavoriteTableViewController: UITableViewController {
 
     //MARK: Private Methods
     private func filterContentForSearchText(_ searchText: String) {
-      filteredPosts = posts.filter { (posts: Post) -> Bool in
+      filteredPosts = favoritePosts.filter { (posts: Post) -> Bool in
         return (posts.image.title?.lowercased().contains(searchText.lowercased()) ?? false)
       }
       

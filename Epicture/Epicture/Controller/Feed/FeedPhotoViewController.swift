@@ -18,6 +18,7 @@ class FeedPhotoViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     
     var post: Post?
+    var isFavorite: Bool = false
     
     var image: UIImage?
     var player: AVPlayer?
@@ -64,18 +65,15 @@ class FeedPhotoViewController: UIViewController {
     //MARK: Actions
     @IBAction func addToFavorite(_ sender: UIButton) {
         //MARK: TODO Add to Favorites
-//        guard let photo = photo else {
-//            return
-//        }
-//        if photo.favorite {
-//            photo.favorite = false
-//            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-//            favoriteButton.tintColor = UIColor.label
-//        } else {
-//            photo.favorite = true
-//            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-//            favoriteButton.tintColor = UIColor.red
-//        }
+        if isFavorite {
+            isFavorite = false
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.tintColor = UIColor.label
+        } else {
+            isFavorite = true
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.tintColor = UIColor.red
+        }
     }
 
     /*

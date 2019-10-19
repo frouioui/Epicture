@@ -21,7 +21,7 @@ var userPosts: [Post] = []
 class FeedTableViewController: UITableViewController {
 
     //MARK: Properties
-    var posts = [Post]()
+//    var posts = [Post]()
     var filteredPosts: [Post] = []
 
     var imageView: UIImageView?
@@ -43,7 +43,7 @@ class FeedTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // Asign user posts
-        posts = userPosts
+//        posts = userPosts
 
         // Add Search Controller in Navigation Bar
         searchController.searchResultsUpdater = self
@@ -124,9 +124,6 @@ class FeedTableViewController: UITableViewController {
                         print("[MyFeed] - A problem occured on video loading")
                         return
                     }
-        //                  if self.playerLayer != nil {
-        //                      self.playerLayer?.removeFromSuperlayer()
-        //                  }
                     self.playerLayer = AVPlayerLayer(player: player)
                     guard let playerLayer = self.playerLayer else {
                         print("[MyFeed] - A problem occured on playerlayer loading")
@@ -167,7 +164,7 @@ class FeedTableViewController: UITableViewController {
             if isFiltering {
                 selectedPost = filteredPosts[indexPath.row]
             } else {
-                selectedPost = posts[indexPath.row]
+                selectedPost = userPosts[indexPath.row]
             }
             feedDetailViewController.post = selectedPost
             feedDetailViewController.image = self.image
@@ -179,29 +176,8 @@ class FeedTableViewController: UITableViewController {
     }
     
     //MARK: Private Methods
-//    private func loadSamplePhotos() {
-//
-//        let image1 = UIImage(named: "photo1")
-//        let image2 = UIImage(named: "photo2")
-//        let image3 = UIImage(named: "photo3")
-//
-//        guard let photo1 = Photo(author: "Anais", photo: image1, title: "Caprese Salad", comment: "blablabla", favorite: true) else {
-//            fatalError("Unable to instantiate photo1")
-//        }
-//
-//        guard let photo2 = Photo(author: "James", photo: image2, title: "Chicken and Potatoes", comment: "blabla") else {
-//            fatalError("Unable to instantiate photo2")
-//        }
-//
-//        guard let photo3 = Photo(author: "Emelia", photo: image3, title: "Pasta with Meatballs", comment: "blablabla") else {
-//            fatalError("Unable to instantiate photo3")
-//        }
-//
-//        photos += [photo1, photo2, photo3]
-//    }
-
     private func filterContentForSearchText(_ searchText: String) {
-      filteredPosts = posts.filter { (posts: Post) -> Bool in
+      filteredPosts = userPosts.filter { (posts: Post) -> Bool in
         return (posts.image.title?.lowercased().contains(searchText.lowercased()) ?? false)
       }
       
