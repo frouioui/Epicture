@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3602C6752356F7C400D43023 /* PhotoSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3602C6742356F7C400D43023 /* PhotoSet.swift */; };
 		360C138823511C48003665D5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C138523511C48003665D5 /* Photo.swift */; };
 		360C138923511FF3003665D5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C138523511C48003665D5 /* Photo.swift */; };
 		360C138A23511FF5003665D5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C138523511C48003665D5 /* Photo.swift */; };
@@ -18,6 +17,7 @@
 		365B9D292354483F00F1E10B /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365B9D282354483F00F1E10B /* FeedTableViewController.swift */; };
 		366490002353BC2900925D17 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36648FFF2353BC2900925D17 /* FeedTableViewCell.swift */; };
 		3664CDA32355DE2D00E408F3 /* SearchPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3664CDA22355DE2D00E408F3 /* SearchPhotoViewController.swift */; };
+		3667554A2358629D00B07D49 /* LoadImgurData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366755492358629D00B07D49 /* LoadImgurData.swift */; };
 		36A462AD234C76F8001EE34E /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A462AC234C76F8001EE34E /* Responses.swift */; };
 		36BA1DC023562EC6008767D7 /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA1DBF23562EC6008767D7 /* FavoriteTableViewController.swift */; };
 		36BA1DC223562EE5008767D7 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA1DC123562EE5008767D7 /* FavoriteTableViewCell.swift */; };
@@ -51,7 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3602C6742356F7C400D43023 /* PhotoSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSet.swift; sourceTree = "<group>"; };
 		360C138523511C48003665D5 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		361818AB235323CC00EEF686 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		361818AC235323CC00EEF686 /* FeedPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPhotoViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		365B9D282354483F00F1E10B /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		36648FFF2353BC2900925D17 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		3664CDA22355DE2D00E408F3 /* SearchPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoViewController.swift; sourceTree = "<group>"; };
+		366755492358629D00B07D49 /* LoadImgurData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImgurData.swift; sourceTree = "<group>"; };
 		36A462AC234C76F8001EE34E /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Responses.swift; path = Epicture/Model/Responses.swift; sourceTree = SOURCE_ROOT; };
 		36BA1DBF23562EC6008767D7 /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
 		36BA1DC123562EE5008767D7 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
@@ -133,6 +133,21 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
+		36912C2E23570FFD006E68DD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		36912C31235715E6006E68DD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				366755492358629D00B07D49 /* LoadImgurData.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		36BA1DBE23561786008767D7 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +171,6 @@
 			children = (
 				36A462AC234C76F8001EE34E /* Responses.swift */,
 				360C138523511C48003665D5 /* Photo.swift */,
-				3602C6742356F7C400D43023 /* PhotoSet.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,11 +218,13 @@
 		4615C6E42342628C00E5C9EE /* Epicture */ = {
 			isa = PBXGroup;
 			children = (
+				36912C2E23570FFD006E68DD /* Extension */,
 				4615C6E52342628C00E5C9EE /* AppDelegate.swift */,
 				4615C6E72342628C00E5C9EE /* SceneDelegate.swift */,
 				36CC5FBE234BC70D00C191C5 /* Controller */,
 				36CC5FBD234BC70800C191C5 /* View */,
 				36CC5FBC234BC6F300C191C5 /* Model */,
+				36912C31235715E6006E68DD /* Utils */,
 				3664CDA42355F9AE00E408F3 /* Layout */,
 				36CC5FB9234BB3AA00C191C5 /* Fonts */,
 				4615C6F12342628E00E5C9EE /* Assets.xcassets */,
@@ -382,8 +398,8 @@
 				361818AE235323CC00EEF686 /* FeedPhotoViewController.swift in Sources */,
 				4615C6F02342628C00E5C9EE /* Epicture.xcdatamodeld in Sources */,
 				4615C6E82342628C00E5C9EE /* SceneDelegate.swift in Sources */,
+				3667554A2358629D00B07D49 /* LoadImgurData.swift in Sources */,
 				366490002353BC2900925D17 /* FeedTableViewCell.swift in Sources */,
-				3602C6752356F7C400D43023 /* PhotoSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,13 +577,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7D5HN63228;
+				DEVELOPMENT_TEAM = Q9X5NBY9Q2;
 				INFOPLIST_FILE = Epicture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Florent.Epicture;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cecile.Epicture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -579,13 +595,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7D5HN63228;
+				DEVELOPMENT_TEAM = Q9X5NBY9Q2;
 				INFOPLIST_FILE = Epicture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Florent.Epicture;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cecile.Epicture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

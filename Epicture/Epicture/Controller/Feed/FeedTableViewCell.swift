@@ -12,7 +12,7 @@ class FeedTableViewCell: UITableViewCell {
 
     //MARK: Properties
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var postView: UIView!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     

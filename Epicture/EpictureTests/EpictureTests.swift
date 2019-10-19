@@ -10,14 +10,6 @@ import XCTest
 @testable import Epicture
 
 class EpictureTests: XCTestCase {
-    
-    //MARK: Photo Class Tests
-    func testPhotoInitializationSucceeds() {
-        let noTitle = Photo.init(title: "title", photo: nil, comment: "comment")
-        XCTAssertNotNil(noTitle)
-        
-    }
-
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }

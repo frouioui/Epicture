@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 extension FavoriteTableViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
@@ -15,11 +16,18 @@ extension FavoriteTableViewController: UISearchResultsUpdating {
   }
 }
 
+var favoritePosts: [Post] = []
+
 class FavoriteTableViewController: UITableViewController {
 
     //MARK: Properties
-    var photos = [Photo]()
-    var filteredPhotos: [Photo] = []
+    var posts: [Post] = []
+    var filteredPosts: [Post] = []
+
+    var imageView: UIImageView?
+    var image: UIImage?
+    var playerLayer: AVPlayerLayer?
+    var player: AVPlayer?
 
     let searchController = UISearchController(searchResultsController: nil)
 
@@ -33,38 +41,30 @@ class FavoriteTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        posts = favoritePosts
 
-        // Load the sample data.
-        loadSamplePhotos()
-
-        // Add Search Controller in Navigation Bar
+        // MARK: Add Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
-    
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // Return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // Return the number of rows
         if isFiltering {
-            return filteredPhotos.count
+            return filteredPosts.count
         }
-        return photos.count
+        return favoritePosts.count
     }
-
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Table view cells are reused and should be dequeued using a cell identifier.
@@ -75,64 +75,73 @@ class FavoriteTableViewController: UITableViewController {
         }
         
         // Fetches the appropriate photo for the data source layout.
-        let photo: Photo
+        let post: Post
         if isFiltering {
-            photo = filteredPhotos[indexPath.row]
+            post = filteredPosts[indexPath.row]
         } else {
-            photo = photos[indexPath.row]
+            post = posts[indexPath.row]
         }
-        
-        cell.authorLabel.text = photo.author
-        cell.titleLabel.text = photo.title
-        cell.photoImageView.image = photo.photo
-        cell.commentLabel.text = photo.comment
-        if photo.favorite {
-            cell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            cell.favoriteButton.tintColor = UIColor.red
-        } else {
-            cell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-            cell.favoriteButton.tintColor = UIColor.label
+        cell.authorLabel.text = post.image.account_url
+        cell.titleLabel.text = post.image.title
+        cell.commentLabel.text = post.image.description
+
+        DispatchQueue.global(qos: .userInteractive).async {
+            guard let link = post.image.link else {
+                print("[Favorites] - A problem occured with post image link")
+                return
+            }
+            guard let url = URL(string: link) else {
+                print("[Favorites] - A problem occured on url conversion")
+                return
+            }
+            if post.image.type!.contains("image/jpg") || post.image.type!.contains("image/jpeg") {
+                guard let data = try? Data(contentsOf: url) else {
+                    print("[Favorites] - A problem occured on data conversion")
+                    return
+                }
+                self.image = UIImage(data: data)
+                if self.image == nil {
+                    print("[Favorites] - A problem occured on image loading")
+                    return
+                }
+                DispatchQueue.main.async {
+                    if self.imageView != nil {
+                        self.imageView?.removeFromSuperview()
+                    }
+                    self.imageView = UIImageView(image: self.image)
+                    guard let imageView = self.imageView else {
+                        print("[Favorites] - A problem occured on imageView loading")
+                        return
+                    }
+                    imageView.contentMode = UIView.ContentMode.scaleAspectFit
+                    imageView.frame = cell.postView.bounds
+                    cell.postView.addSubview(self.imageView!)
+                }
+            } else if post.image.type!.contains("/mp4") || post.image.type!.contains("/avi") {
+                DispatchQueue.main.async {
+                    self.player = AVPlayer(url: url)
+                    guard let player = self.player else {
+                        print("[Favorites] - A problem occured on video loading")
+                        return
+                    }
+//                    if self.playerLayer != nil {
+//                        self.playerLayer?.removeFromSuperlayer()
+//                    }
+                    self.playerLayer = AVPlayerLayer(player: player)
+                    guard let playerLayer = self.playerLayer else {
+                        print("[Favorites] - A problem occured on playerlayer loading")
+                        return
+                    }
+                    playerLayer.frame = cell.postView.bounds
+                    playerLayer.videoGravity = AVLayerVideoGravity.resize
+                    cell.postView.layer.addSublayer(playerLayer)
+                    player.play()
+                }
+            }
         }
-        
+
         return cell
     }
-
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
 
     // MARK: - Navigation
 
@@ -154,44 +163,25 @@ class FavoriteTableViewController: UITableViewController {
                 fatalError("The selected cell is not being displayed by the table")
             }
 
-            let selectedPhoto: Photo
+            let selectedPost: Post
 
             if isFiltering {
-                selectedPhoto = filteredPhotos[indexPath.row]
+                selectedPost = filteredPosts[indexPath.row]
             } else {
-                selectedPhoto = photos[indexPath.row]
+                selectedPost = posts[indexPath.row]
             }
-            favoriteDetailViewController.photo = selectedPhoto
+            favoriteDetailViewController.post = selectedPost
+            favoriteDetailViewController.image = self.image
+            favoriteDetailViewController.player = self.player
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
     }
 
     //MARK: Private Methods
-    private func loadSamplePhotos() {
-        
-        let image1 = UIImage(named: "photo1")
-        let image2 = UIImage(named: "photo2")
-        let image3 = UIImage(named: "photo3")
-        
-        guard let photo1 = Photo(author: "Anais", photo: image1, title: "Caprese Salad", comment: "blablabla", favorite: true) else {
-            fatalError("Unable to instantiate photo1")
-        }
-
-        guard let photo2 = Photo(author: "James", photo: image2, title: "Chicken and Potatoes", comment: "blabla") else {
-            fatalError("Unable to instantiate photo2")
-        }
-
-        guard let photo3 = Photo(author: "Emelia", photo: image3, title: "Pasta with Meatballs", comment: "blablabla") else {
-            fatalError("Unable to instantiate photo3")
-        }
-        
-        photos += [photo1, photo2, photo3]
-    }
-
     private func filterContentForSearchText(_ searchText: String) {
-      filteredPhotos = photos.filter { (photo: Photo) -> Bool in
-        return photo.title.lowercased().contains(searchText.lowercased())
+      filteredPosts = posts.filter { (posts: Post) -> Bool in
+        return (posts.image.title?.lowercased().contains(searchText.lowercased()) ?? false)
       }
       
       tableView.reloadData()
