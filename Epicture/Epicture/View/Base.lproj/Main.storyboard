@@ -179,6 +179,9 @@
                                                             <state key="normal" backgroundImage="heart.fill" catalog="system">
                                                                 <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="handleFavorite:" destination="eNB-xs-MQI" eventType="touchUpInside" id="hfs-Q2-YM1"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -528,6 +531,9 @@
                                                             <state key="normal" backgroundImage="heart" catalog="system">
                                                                 <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="handleFavorite:" destination="wzb-Pb-JLn" eventType="touchUpInside" id="pOp-dg-EF3"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
