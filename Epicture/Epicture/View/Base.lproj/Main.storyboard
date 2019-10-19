@@ -627,6 +627,8 @@
                                     <constraint firstAttribute="bottom" secondItem="Vuq-qi-myd" secondAttribute="bottom" id="e0W-cG-jtb"/>
                                     <constraint firstItem="x68-4j-ibZ" firstAttribute="leading" secondItem="s1D-2W-9aq" secondAttribute="leading" constant="10" id="efw-YV-tRK"/>
                                     <constraint firstItem="Vuq-qi-myd" firstAttribute="leading" secondItem="s1D-2W-9aq" secondAttribute="leading" constant="20" id="hdq-cI-aEp"/>
+                                    <constraint firstAttribute="trailing" secondItem="dWC-IY-bJP" secondAttribute="trailing" id="vu0-5o-F46"/>
+                                    <constraint firstItem="dWC-IY-bJP" firstAttribute="leading" secondItem="s1D-2W-9aq" secondAttribute="leading" id="wRu-Df-4sR"/>
                                     <constraint firstAttribute="trailing" secondItem="x68-4j-ibZ" secondAttribute="trailing" constant="10" id="x7i-Fq-V8G"/>
                                 </constraints>
                             </stackView>
