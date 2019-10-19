@@ -34,7 +34,11 @@ class AuthViewController: UIViewController {
         let client = ImgurAPIClient()
 
         do {
-            let avatar_url = try client.manageThisFavorite(id:"GL6t82p")
+            var avatar_url = try client.getVotesPost(postId: "GL6t82p")
+            print(avatar_url)
+            let res = try client.voteManagePost(postId: "GL6t82p", vote: VotePost.veto)
+            print(res)
+            avatar_url = try client.getVotesPost(postId: "GL6t82p")
             print(avatar_url)
         } catch let err {
             print(err)
