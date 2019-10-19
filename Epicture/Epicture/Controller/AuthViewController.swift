@@ -34,12 +34,11 @@ class AuthViewController: UIViewController {
         let client = ImgurAPIClient()
 
         do {
-            let avatar_url = try client.getSearchResult(username:  UserDefaults.standard.string(forKey: "account_username")!, keywords: ["cats"], sort: ImgurAPIClient.SortSearch.day)
+            let avatar_url = try client.manageThisFavorite(id:"GL6t82p")
             print(avatar_url)
         } catch let err {
             print(err)
         }
-        
     }
 
     //MARK: Actions
