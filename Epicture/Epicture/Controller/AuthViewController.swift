@@ -39,7 +39,6 @@ class AuthViewController: UIViewController {
         } catch let err {
             print(err)
         }
-        
     }
 
     //MARK: Actions
