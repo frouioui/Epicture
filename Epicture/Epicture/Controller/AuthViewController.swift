@@ -53,18 +53,5 @@ class AuthViewController: UIViewController {
             return
         }
         UIApplication.shared.open(url)
-//        loadFavoriteFromImgur()
-//        loadUserFeedFromImgur()
-//        openTabBarController()
     }
-
-    //MARK: Private function
-//    private func openTabBarController() {
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
-//
-//        mainTabBarController.modalPresentationStyle = .fullScreen
-//        self.present(mainTabBarController, animated: false, completion: nil)
-//    }
-    
 }
