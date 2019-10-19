@@ -19,6 +19,9 @@ class FeedPhotoViewController: UIViewController {
     
     var post: Post?
     
+    var image: UIImage?
+    var player: AVPlayer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,31 +31,25 @@ class FeedPhotoViewController: UIViewController {
         navigationItem.title = post.image.title
         titleLabel.text = post.image.title
         commentLabel.text = post.image.description
-        DispatchQueue.global(qos: .background).async {
-            guard let link = post.image.link else {
-                print("Favorites - A problem occured with post image link")
-                return
-            }
-            guard let url = URL(string: link) else {
-                print("Favorites - A problem occured on url conversion")
-                return
-            }
-            guard let data = try? Data(contentsOf: url) else {
-                print("Favorites - A problem occured on data conversion")
-                return
-            }
+    
+        DispatchQueue.global(qos: .userInteractive).async {
             if post.image.type!.contains("image/jpg") || post.image.type!.contains("image/jpeg") {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        let imageView = UIImageView(image: image)
-                        imageView.contentMode = UIView.ContentMode.scaleAspectFit
-                        imageView.frame = self.postView.bounds
-                        self.postView.addSubview(imageView)
-                    }
+                guard let image = self.image else {
+                    print("[MyFeedPhoto] - A problem occured on image transfert")
+                    return
+                }
+                DispatchQueue.main.async {
+                    let imageView = UIImageView(image: image)
+                    imageView.contentMode = UIView.ContentMode.scaleAspectFit
+                    imageView.frame = self.postView.bounds
+                    self.postView.addSubview(imageView)
                 }
             } else if post.image.type!.contains("/mp4") || post.image.type!.contains("/avi") {
+                guard let player = self.player else {
+                    print("[MyFeedPhoto] - A problem occured on video transfert")
+                    return
+                }
                 DispatchQueue.main.async {
-                    let player = AVPlayer(url: url)
                     let playerLayer = AVPlayerLayer(player: player)
                     playerLayer.frame = self.postView.bounds
                     playerLayer.videoGravity = AVLayerVideoGravity.resize

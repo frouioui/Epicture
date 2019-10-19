@@ -24,6 +24,11 @@ class FeedTableViewController: UITableViewController {
     var posts = [Post]()
     var filteredPosts: [Post] = []
 
+    var imageView: UIImageView?
+    var image: UIImage?
+    var playerLayer: AVPlayerLayer?
+    var player: AVPlayer?
+
     let searchController = UISearchController(searchResultsController: nil)
 
     var isSearchBarEmpty: Bool {
@@ -79,33 +84,54 @@ class FeedTableViewController: UITableViewController {
         
         cell.titleLabel.text = post.image.title
         cell.commentLabel.text = post.image.description
-        
-        DispatchQueue.global(qos: .background).async {
+
+        DispatchQueue.global(qos: .userInteractive).async {
             guard let link = post.image.link else {
-                print("MyFeed - A problem occured with post image link")
+                print("[MyFeed] - A problem occured with post image link")
                 return
             }
             guard let url = URL(string: link) else {
-                print("MyFeed - A problem occured on url conversion")
-                return
-            }
-            guard let data = try? Data(contentsOf: url) else {
-                print("MyFeed - A problem occured on data conversion")
+                print("[MyFeed] - A problem occured on url conversion")
                 return
             }
             if post.image.type!.contains("image/jpg") || post.image.type!.contains("image/jpeg") {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        let imageView = UIImageView(image: image)
-                        imageView.contentMode = UIView.ContentMode.scaleAspectFit
-                        imageView.frame = cell.postView.bounds
-                        cell.postView.addSubview(imageView)
+                guard let data = try? Data(contentsOf: url) else {
+                    print("[MyFeed] - A problem occured on data conversion")
+                    return
+                }
+                self.image = UIImage(data: data)
+                if self.image == nil {
+                    print("[MyFeed] - A problem occured on image loading")
+                    return
+                }
+                DispatchQueue.main.async {
+                    if self.imageView != nil {
+                        self.imageView?.removeFromSuperview()
                     }
+                    self.imageView = UIImageView(image: self.image)
+                    guard let imageView = self.imageView else {
+                        print("[MyFeed] - A problem occured on imageView loading")
+                        return
+                    }
+                    imageView.contentMode = UIView.ContentMode.scaleAspectFit
+                    imageView.frame = cell.postView.bounds
+                    cell.postView.addSubview(self.imageView!)
                 }
             } else if post.image.type!.contains("/mp4") || post.image.type!.contains("/avi") {
                 DispatchQueue.main.async {
-                    let player = AVPlayer(url: url)
-                    let playerLayer = AVPlayerLayer(player: player)
+                    self.player = AVPlayer(url: url)
+                    guard let player = self.player else {
+                        print("[MyFeed] - A problem occured on video loading")
+                        return
+                    }
+        //                  if self.playerLayer != nil {
+        //                      self.playerLayer?.removeFromSuperlayer()
+        //                  }
+                    self.playerLayer = AVPlayerLayer(player: player)
+                    guard let playerLayer = self.playerLayer else {
+                        print("[MyFeed] - A problem occured on playerlayer loading")
+                        return
+                    }
                     playerLayer.frame = cell.postView.bounds
                     playerLayer.videoGravity = AVLayerVideoGravity.resize
                     cell.postView.layer.addSublayer(playerLayer)
@@ -113,14 +139,6 @@ class FeedTableViewController: UITableViewController {
                 }
             }
         }
-//        if photo.favorite {
-//            cell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-//            cell.favoriteButton.tintColor = UIColor.red
-//        } else {
-//            cell.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-//            cell.favoriteButton.tintColor = UIColor.label
-//        }
-        tableView.reloadData()
         return cell
     }
 
@@ -152,6 +170,8 @@ class FeedTableViewController: UITableViewController {
                 selectedPost = posts[indexPath.row]
             }
             feedDetailViewController.post = selectedPost
+            feedDetailViewController.image = self.image
+            feedDetailViewController.player = self.player
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }

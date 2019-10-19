@@ -11,30 +11,20 @@ import UIKit
 func loadFavoriteFromImgur() {
     let client = ImgurAPIClient()
 
-//    DispatchQueue.global(qos: .background).async {
-        do {
-            let tmpPosts = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
-//            DispatchQueue.main.async {
-                favoritePosts = tmpPosts
-//            }
-        } catch let err {
-            print(err)
-        }
-//    }
+    do {
+        favoritePosts = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
+    } catch let err {
+        print(err)
+    }
 }
 
 func loadUserFeedFromImgur() {
     let client = ImgurAPIClient()
 
-    DispatchQueue.global(qos: .background).async {
-        do {
-            let tmpPosts = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
-            DispatchQueue.main.async {
-                favoritePosts = tmpPosts
-            }
-        } catch let err {
-            print(err)
-        }
+    do {
+        userPosts = try client.getFavorites(username: UserDefaults.standard.string(forKey: "account_username")!)
+    } catch let err {
+        print(err)
     }
 }
 
