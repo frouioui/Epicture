@@ -10,7 +10,8 @@ import UIKit
 
 class FavoriteTableViewCell: UITableViewCell {
 
-    //MARK: Properties
+    //MARK: - Properties
+
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postView: UIView!
@@ -22,16 +23,14 @@ class FavoriteTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    //MARK: Actions
+    //MARK: - Manage Favorite
+
     @IBAction func handleFavorite(_ sender: UIButton) {
         let client = ImgurAPIClient()
         //MARK: TODO Add to Favorites

@@ -11,7 +11,8 @@ import AVKit
 
 class FeedPhotoViewController: UIViewController {
     
-    //MARK: Properties
+    //MARK: - Properties
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postView: UIView!
     @IBOutlet weak var commentLabel: UILabel!
@@ -23,6 +24,7 @@ class FeedPhotoViewController: UIViewController {
     var image: UIImage?
     var player: AVPlayer?
 
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -82,7 +84,7 @@ class FeedPhotoViewController: UIViewController {
 
     }
 
-    //MARK: Actions
+    //MARK: - Manage Favorite
     @IBAction func addToFavorite(_ sender: UIButton) {
         let client = ImgurAPIClient()
         if isFavorite {
@@ -98,15 +100,4 @@ class FeedPhotoViewController: UIViewController {
         }
         loadFavoriteFromImgur()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

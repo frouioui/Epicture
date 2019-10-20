@@ -45,7 +45,7 @@ class AuthViewController: UIViewController {
         }
     }
 
-    //MARK: Actions
+    //MARK: - Connect With Imgur
     @IBAction func connectWithImgur(_ sender: UIButton) {
         let client = ImgurAPIClient()
 

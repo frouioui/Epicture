@@ -11,6 +11,8 @@ import AVKit
 
 class FavoritePhotoViewController: UIViewController {
 
+    //MARK: - Properties
+
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postView: UIView!
@@ -22,6 +24,8 @@ class FavoritePhotoViewController: UIViewController {
 
     var image: UIImage?
     var player: AVPlayer?
+
+    //MARK: - ViewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +86,8 @@ class FavoritePhotoViewController: UIViewController {
         }
     }
     
+    //MARK: - Manage Favorite
+
     @IBAction func manageFavorite(_ sender: UIButton) {
         let client = ImgurAPIClient()
         if isFavorite {
@@ -97,15 +103,4 @@ class FavoritePhotoViewController: UIViewController {
         }
         loadFavoriteFromImgur()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

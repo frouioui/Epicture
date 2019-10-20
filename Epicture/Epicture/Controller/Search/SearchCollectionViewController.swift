@@ -14,7 +14,8 @@ private let reuseIdentifier = "Cell"
 
 class SearchCollectionViewController: UICollectionViewController, UISearchBarDelegate {
     
-    //MARK: Properties
+    //MARK: - Properties
+
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     var posts: [Post] = []
@@ -38,6 +39,8 @@ class SearchCollectionViewController: UICollectionViewController, UISearchBarDel
     }
     var isFiltering: Bool = false
 
+    // MARK: - ViewDidLoad
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,7 +52,7 @@ class SearchCollectionViewController: UICollectionViewController, UISearchBarDel
         definesPresentationContext = true
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - Collection View Data Source
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -137,7 +140,6 @@ class SearchCollectionViewController: UICollectionViewController, UISearchBarDel
 
     //MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
 
@@ -172,27 +174,30 @@ class SearchCollectionViewController: UICollectionViewController, UISearchBarDel
         
     }
     
-    //MARK:Action
+    //MARK: - Filter Content with Segment Controller
+
     @IBAction func filterContent(_ sender: UISegmentedControl) {
         switch self.segmentControl.selectedSegmentIndex {
             case 0:
-                function(keywords: self.keywords, sort: .year)
+                searchKeywords(keywords: self.keywords, sort: .year)
                 self.isFiltering = true
             case 1:
-                function(keywords: self.keywords, sort: .month)
+                searchKeywords(keywords: self.keywords, sort: .month)
                 self.isFiltering = true
             case 2:
-                function(keywords: self.keywords, sort: .week)
+                searchKeywords(keywords: self.keywords, sort: .week)
                 self.isFiltering = true
             case 3:
-                function(keywords: self.keywords, sort: .day)
+                searchKeywords(keywords: self.keywords, sort: .day)
                 self.isFiltering = true
             default:
-                function(keywords: self.keywords, sort: .all)
+                searchKeywords(keywords: self.keywords, sort: .all)
                 self.isFiltering = true
         }
         self.collectionView.reloadData()
     }
+
+    //MARK: - Filter Content with Search Bar
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else {
@@ -206,26 +211,26 @@ class SearchCollectionViewController: UICollectionViewController, UISearchBarDel
         
         switch self.segmentControl.selectedSegmentIndex {
             case 0:
-                function(keywords: self.keywords, sort: .year)
+                searchKeywords(keywords: self.keywords, sort: .year)
                 self.isFiltering = true
             case 1:
-                function(keywords: self.keywords, sort: .month)
+                searchKeywords(keywords: self.keywords, sort: .month)
                 self.isFiltering = true
             case 2:
-                function(keywords: self.keywords, sort: .week)
+                searchKeywords(keywords: self.keywords, sort: .week)
                 self.isFiltering = true
             case 3:
-                function(keywords: self.keywords, sort: .day)
+                searchKeywords(keywords: self.keywords, sort: .day)
                 self.isFiltering = true
             default:
-                function(keywords: self.keywords, sort: .all)
+                searchKeywords(keywords: self.keywords, sort: .all)
                 self.isFiltering = true
         }
         searchBar.resignFirstResponder()
         self.collectionView?.reloadData()
     }
 
-    private func function(keywords: [String], sort: ImgurAPIClient.SortSearch) {
+    private func searchKeywords(keywords: [String], sort: ImgurAPIClient.SortSearch) {
         let client = ImgurAPIClient()
         
         guard let username = UserDefaults.standard.string(forKey: "account_username") else {

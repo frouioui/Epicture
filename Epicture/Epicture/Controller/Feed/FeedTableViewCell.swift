@@ -10,7 +10,8 @@ import UIKit
 
 class FeedTableViewCell: UITableViewCell {
 
-    //MARK: Properties
+    //MARK: - Properties
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postView: UIView!
     @IBOutlet weak var commentLabel: UILabel!
@@ -21,15 +22,11 @@ class FeedTableViewCell: UITableViewCell {
     var isFavorite: Bool = false
 
     override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    
+        super.awakeFromNib()    
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }
