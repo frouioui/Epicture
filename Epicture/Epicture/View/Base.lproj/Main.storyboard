@@ -100,21 +100,79 @@
             </objects>
             <point key="canvasLocation" x="-349.27536231884062" y="128.57142857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Add photo-->
         <scene sceneID="qgh-aY-szN">
             <objects>
-                <viewController id="yVg-vp-TY3" sceneMemberID="viewController">
+                <viewController id="yVg-vp-TY3" customClass="UploadViewController" customModule="Epicture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lyi-9K-chF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="T5Q-4X-l8z">
+                                <rect key="frame" x="0.0" y="150" width="414" height="492"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07G-f1-cri">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="07G-f1-cri" secondAttribute="height" multiplier="1:1" id="dqx-D7-xYF"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="QgP-vs-TAd" appends="YES" id="exK-Ak-HDL"/>
+                                        </connections>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Give your post a title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="isy-7r-B9h">
+                                        <rect key="frame" x="10" y="419" width="394" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Jo-hK-hpN">
+                                        <rect key="frame" x="10" y="458" width="394" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="4Jo-hK-hpN" firstAttribute="leading" secondItem="T5Q-4X-l8z" secondAttribute="leading" constant="10" id="DOk-l6-D8b"/>
+                                    <constraint firstItem="07G-f1-cri" firstAttribute="leading" secondItem="T5Q-4X-l8z" secondAttribute="leading" id="HlM-uN-XZo"/>
+                                    <constraint firstItem="isy-7r-B9h" firstAttribute="leading" secondItem="T5Q-4X-l8z" secondAttribute="leading" constant="10" id="P8a-qa-vMV"/>
+                                    <constraint firstAttribute="trailing" secondItem="isy-7r-B9h" secondAttribute="trailing" constant="10" id="a4z-Ea-G65"/>
+                                    <constraint firstAttribute="trailing" secondItem="4Jo-hK-hpN" secondAttribute="trailing" constant="10" id="kZN-mN-TI3"/>
+                                    <constraint firstAttribute="trailing" secondItem="07G-f1-cri" secondAttribute="trailing" id="nsz-K5-1jE"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="T5Q-4X-l8z" firstAttribute="leading" secondItem="YTL-eA-fsY" secondAttribute="leading" id="8Ew-nG-cQo"/>
+                            <constraint firstItem="T5Q-4X-l8z" firstAttribute="trailing" secondItem="YTL-eA-fsY" secondAttribute="trailing" id="MP4-4L-XpN"/>
+                            <constraint firstItem="T5Q-4X-l8z" firstAttribute="top" secondItem="YTL-eA-fsY" secondAttribute="top" constant="10" id="xx5-ve-OzZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="YTL-eA-fsY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="plus.app" catalog="system" id="z2Q-YF-dn4"/>
+                    <navigationItem key="navigationItem" title="Add photo" id="llv-cK-ZTI">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Add" id="vGj-Mr-KNg">
+                            <connections>
+                                <action selector="addPostToImgur:" destination="yVg-vp-TY3" id="liH-KG-rJ0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="vGj-Mr-KNg" id="12h-Vb-Zy8"/>
+                        <outlet property="descriptionTextField" destination="4Jo-hK-hpN" id="TYC-x4-KWL"/>
+                        <outlet property="postView" destination="07G-f1-cri" id="3MT-iK-9tr"/>
+                        <outlet property="titleTextField" destination="isy-7r-B9h" id="Ov4-nI-LAk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugr-nJ-FDl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QgP-vs-TAd">
+                    <connections>
+                        <action selector="changeSelectedImage:" destination="yVg-vp-TY3" id="hNy-sC-hFN"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1604" y="485"/>
+            <point key="canvasLocation" x="2513.04347826087" y="484.82142857142856"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="HPw-yD-AGk">
@@ -367,7 +425,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="5Nf-HI-NuK">
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="4" id="1nD-sa-7tK">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="4" id="1nD-sa-7tK">
                             <rect key="frame" x="60" y="5.6666666666666679" width="294" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
@@ -493,7 +551,7 @@
                     <connections>
                         <segue destination="FVQ-Q6-OYE" kind="relationship" relationship="viewControllers" id="AfS-ly-c2H"/>
                         <segue destination="F8x-fQ-Pvk" kind="relationship" relationship="viewControllers" id="Cin-wE-rN6"/>
-                        <segue destination="yVg-vp-TY3" kind="relationship" relationship="viewControllers" id="Z7E-CU-zBv"/>
+                        <segue destination="qPt-5D-8V5" kind="relationship" relationship="viewControllers" id="Z7E-CU-zBv"/>
                         <segue destination="n57-NH-DAJ" kind="relationship" relationship="viewControllers" id="FwQ-Cm-Haj"/>
                     </connections>
                 </tabBarController>
@@ -686,7 +744,7 @@
         <!--Navigation Controller-->
         <scene sceneID="sA0-Be-GKD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FVQ-Q6-OYE" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MyFeedTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="FVQ-Q6-OYE" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="yql-TA-PwR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="sj5-Am-Wkk">
@@ -739,6 +797,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kw-af-VLQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1604" y="1221.4285714285716"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JQv-BJ-G1x">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qPt-5D-8V5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="plus.app" catalog="system" id="z2Q-YF-dn4"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ztg-VN-Acc">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="yVg-vp-TY3" kind="relationship" relationship="rootViewController" id="jkz-we-bDP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Roq-2Q-qVO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1602.8985507246377" y="484.82142857142856"/>
         </scene>
     </scenes>
     <resources>

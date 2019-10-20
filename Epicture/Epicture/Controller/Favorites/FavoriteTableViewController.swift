@@ -100,7 +100,7 @@ class FavoriteTableViewController: UITableViewController {
                 print("[Favorites] - Empty image type")
                 return
             }
-            if type.contains("image/jpg") || type.contains("image/jpeg") {
+            if type.contains("image/png") || type.contains("image/jpg") || type.contains("image/jpeg") {
                 guard let data = try? Data(contentsOf: url) else {
                     print("[Favorites] - A problem occured on data conversion")
                     return
