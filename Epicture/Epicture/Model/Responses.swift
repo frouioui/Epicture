@@ -616,88 +616,88 @@ public class ImgurAPIClient {
     }
     
     //MARK: getVotesPost
-    func getVotesPost(postId: String) throws -> VotesResponse.VotesData {
-        let session = URLSession.shared
-        var voteData = VotesResponse.VotesData()
-        var done = false
-          
-        guard let url = URL(string: "https://api.imgur.com/3/gallery/" + postId + "/votes") else {
-            throw ImgurError.invalidURL
-        }
-
-        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval:100)
-        urlRequest.httpMethod = "GET"
-
-        try self.setAuthBearerHeader(urlRequest: &urlRequest)
-          
-        let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
-            if error != nil || data == nil {
-                self.handleClientError(err: error!)
-                done = true
-                return
-            }
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
-                self.handleAPIError(resp: response!)
-                done = true
-                return
-            }
-            guard let mime = response?.mimeType, mime == "application/json" else {
-                print("Wrong MIME type!")
-                done = true
-                return
-            }
-
-            let votesResp = try! JSONDecoder().decode(VotesResponse.self, from: data!)
-              
-            voteData = votesResp.data
-            done = true
-        })
-        task.resume()
-        while (done == false) {}
-        return voteData
-    }
-    
-    //MARK: voteManagePost
-    func voteManagePost(postId: String, vote: VotePost) throws -> Bool {
-        let session = URLSession.shared
-        var voteManageData = false
-        var done = false
-          
-        guard let url = URL(string: "https://api.imgur.com/3/gallery/" + postId + "/vote/" + vote.rawValue) else {
-            throw ImgurError.invalidURL
-        }
-
-        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval:100)
-        urlRequest.httpMethod = "POST"
-
-        try self.setAuthBearerHeader(urlRequest: &urlRequest)
-          
-        let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
-            if error != nil || data == nil {
-                self.handleClientError(err: error!)
-                done = true
-                return
-            }
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
-                self.handleAPIError(resp: response!)
-                done = true
-                return
-            }
-            guard let mime = response?.mimeType, mime == "application/json" else {
-                print("Wrong MIME type!")
-                done = true
-                return
-            }
-
-            let votesResp = try! JSONDecoder().decode(VotesManageData.self, from: data!)
-              
-            voteManageData = votesResp.data
-            done = true
-        })
-        task.resume()
-        while (done == false) {}
-        return voteManageData
-    }
+//    func getVotesPost(postId: String) throws -> VotesResponse.VotesData {
+//        let session = URLSession.shared
+//        var voteData = VotesResponse.VotesData()
+//        var done = false
+//
+//        guard let url = URL(string: "https://api.imgur.com/3/gallery/" + postId + "/votes") else {
+//            throw ImgurError.invalidURL
+//        }
+//
+//        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval:100)
+//        urlRequest.httpMethod = "GET"
+//
+//        try self.setAuthBearerHeader(urlRequest: &urlRequest)
+//
+//        let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
+//            if error != nil || data == nil {
+//                self.handleClientError(err: error!)
+//                done = true
+//                return
+//            }
+//            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
+//                self.handleAPIError(resp: response!)
+//                done = true
+//                return
+//            }
+//            guard let mime = response?.mimeType, mime == "application/json" else {
+//                print("Wrong MIME type!")
+//                done = true
+//                return
+//            }
+//
+//            let votesResp = try! JSONDecoder().decode(VotesResponse.self, from: data!)
+//
+//            voteData = votesResp.data
+//            done = true
+//        })
+//        task.resume()
+//        while (done == false) {}
+//        return voteData
+//    }
+//
+//    //MARK: voteManagePost
+//    func voteManagePost(postId: String, vote: VotePost) throws -> Bool {
+//        let session = URLSession.shared
+//        var voteManageData = false
+//        var done = false
+//
+//        guard let url = URL(string: "https://api.imgur.com/3/gallery/" + postId + "/vote/" + vote.rawValue) else {
+//            throw ImgurError.invalidURL
+//        }
+//
+//        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval:100)
+//        urlRequest.httpMethod = "POST"
+//
+//        try self.setAuthBearerHeader(urlRequest: &urlRequest)
+//
+//        let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
+//            if error != nil || data == nil {
+//                self.handleClientError(err: error!)
+//                done = true
+//                return
+//            }
+//            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
+//                self.handleAPIError(resp: response!)
+//                done = true
+//                return
+//            }
+//            guard let mime = response?.mimeType, mime == "application/json" else {
+//                print("Wrong MIME type!")
+//                done = true
+//                return
+//            }
+//
+//            let votesResp = try! JSONDecoder().decode(VotesManageData.self, from: data!)
+//
+//            voteManageData = votesResp.data
+//            done = true
+//        })
+//        task.resume()
+//        while (done == false) {}
+//        return voteManageData
+//    }
 
     //MARK: uploadPhoto
     func uploadPhoto(photoBase64: String, title: String?, description: String?) throws -> String {

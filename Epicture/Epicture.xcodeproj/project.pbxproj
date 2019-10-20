@@ -33,6 +33,7 @@
 		4615C6F52342628E00E5C9EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4615C6F32342628E00E5C9EE /* LaunchScreen.storyboard */; };
 		4615C7002342628E00E5C9EE /* EpictureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C6FF2342628E00E5C9EE /* EpictureTests.swift */; };
 		4615C70B2342628E00E5C9EE /* EpictureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615C70A2342628E00E5C9EE /* EpictureUITests.swift */; };
+		46BF8385235CDF570013EFE5 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A462AC234C76F8001EE34E /* Responses.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -407,6 +408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46BF8385235CDF570013EFE5 /* Responses.swift in Sources */,
 				360C138A23511FF5003665D5 /* Photo.swift in Sources */,
 				4615C7002342628E00E5C9EE /* EpictureTests.swift in Sources */,
 			);
@@ -577,7 +579,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q9X5NBY9Q2;
+				DEVELOPMENT_TEAM = 7D5HN63228;
 				INFOPLIST_FILE = Epicture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -595,7 +597,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q9X5NBY9Q2;
+				DEVELOPMENT_TEAM = 7D5HN63228;
 				INFOPLIST_FILE = Epicture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -635,7 +637,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7D5HN63228;
 				INFOPLIST_FILE = EpictureTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -646,6 +648,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Florent-Poinsard.EpictureTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Epicture.app/Epicture";
@@ -657,7 +661,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q9X5NBY9Q2;
+				DEVELOPMENT_TEAM = 7D5HN63228;
 				INFOPLIST_FILE = EpictureUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -677,7 +681,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q9X5NBY9Q2;
+				DEVELOPMENT_TEAM = 7D5HN63228;
 				INFOPLIST_FILE = EpictureUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
