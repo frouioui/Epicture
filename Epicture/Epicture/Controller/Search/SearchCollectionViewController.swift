@@ -12,20 +12,15 @@ import os.log
 
 private let reuseIdentifier = "Cell"
 
-extension SearchCollectionViewController: UISearchResultsUpdating {
-  func updateSearchResults(for searchController: UISearchController) {
-    let searchBar = searchController.searchBar
-    filterContentForSearchText(searchBar.text!)
-  }
-}
-
-class SearchCollectionViewController: UICollectionViewController {
+class SearchCollectionViewController: UICollectionViewController, UISearchBarDelegate {
     
     //MARK: Properties
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     var posts: [Post] = []
     var filteredPosts: [Post] = []
+    
+    var keywords: [String] = []
     
     var imageView: UIImageView?
     var image: UIImage?
@@ -46,21 +41,15 @@ class SearchCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        // Add Search Controller in Navigation Bar
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
 
     // MARK: UICollectionViewDataSource
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -185,109 +174,68 @@ class SearchCollectionViewController: UICollectionViewController {
     
     //MARK:Action
     @IBAction func filterContent(_ sender: UISegmentedControl) {
+        switch self.segmentControl.selectedSegmentIndex {
+            case 0:
+                function(keywords: self.keywords, sort: .year)
+                self.isFiltering = true
+            case 1:
+                function(keywords: self.keywords, sort: .month)
+                self.isFiltering = true
+            case 2:
+                function(keywords: self.keywords, sort: .week)
+                self.isFiltering = true
+            case 3:
+                function(keywords: self.keywords, sort: .day)
+                self.isFiltering = true
+            default:
+                function(keywords: self.keywords, sort: .all)
+                self.isFiltering = true
+        }
+        self.collectionView.reloadData()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else {
+            return
+        }
+        
+        if !self.keywords.isEmpty {
+            self.keywords.removeAll()
+        }
+        self.keywords = searchText.components(separatedBy: " ")
+        
+        switch self.segmentControl.selectedSegmentIndex {
+            case 0:
+                function(keywords: self.keywords, sort: .year)
+                self.isFiltering = true
+            case 1:
+                function(keywords: self.keywords, sort: .month)
+                self.isFiltering = true
+            case 2:
+                function(keywords: self.keywords, sort: .week)
+                self.isFiltering = true
+            case 3:
+                function(keywords: self.keywords, sort: .day)
+                self.isFiltering = true
+            default:
+                function(keywords: self.keywords, sort: .all)
+                self.isFiltering = true
+        }
+        searchBar.resignFirstResponder()
+        self.collectionView?.reloadData()
+    }
+
+    private func function(keywords: [String], sort: ImgurAPIClient.SortSearch) {
         let client = ImgurAPIClient()
         
         guard let username = UserDefaults.standard.string(forKey: "account_username") else {
             print("[loadUserFeedFromImgur] - Empty username")
             return
         }
-        
-        switch self.segmentControl.selectedSegmentIndex {
-        case 0:
-            do {
-                self.filteredPosts = try client.getSearchResult(username: username, keywords:[], sort: ImgurAPIClient.SortSearch.year)
-            } catch let err {
-                print(err)
-            }
-            self.isFiltering = true
-        case 1:
-            do {
-                self.filteredPosts = try client.getSearchResult(username: username, keywords:[], sort: ImgurAPIClient.SortSearch.month)
-            } catch let err {
-                print(err)
-            }
-            self.isFiltering = true
-        case 2:
-            do {
-                self.filteredPosts = try client.getSearchResult(username: username, keywords:[], sort: ImgurAPIClient.SortSearch.week)
-            } catch let err {
-                print(err)
-            }
-            self.isFiltering = true
-          case 3:
-            do {
-                self.filteredPosts = try client.getSearchResult(username: username, keywords:[], sort: ImgurAPIClient.SortSearch.day)
-            } catch let err {
-                print(err)
-            }
-            self.isFiltering = true
-        case 4:
-            self.filteredPosts = favoritePosts
-            self.isFiltering = false
-        default:
-            self.filteredPosts = favoritePosts
-            self.isFiltering = false
+        do {
+            self.filteredPosts = try client.getSearchResult(username: username, keywords: keywords, sort: sort)
+        } catch let err {
+            print(err)
         }
-        collectionView.reloadData()
-    }
-    
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-     Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-
-    }
-    */
-    //MARK: Privates Methods
-//    private func loadPhoto() {
-//        //MARK: TODO load photo from Imgur
-//        let image1 = UIImage(named: "photo1")
-//        let image2 = UIImage(named: "photo2")
-//        let image3 = UIImage(named: "photo3")
-//
-//        guard let photo1 = Photo(author: "Anais", photo: image1, title: "Caprese Salad", comment: "blablabla", favorite: true) else {
-//            fatalError("Unable to instantiate photo1")
-//        }
-//
-//        guard let photo2 = Photo(author: "James", photo: image2, title: "Chicken and Potatoes", comment: "blabla") else {
-//            fatalError("Unable to instantiate photo2")
-//        }
-//
-//        guard let photo3 = Photo(author: "Emelia", photo: image3, title: "Pasta with Meatballs", comment: "blablabla") else {
-//            fatalError("Unable to instantiate photo3")
-//        }
-//
-//        photos += [photo1, photo2, photo3]
-//    }
-
-    private func filterContentForSearchText(_ searchText: String) {
-      filteredPosts = posts.filter { (posts: Post) -> Bool in
-        return (posts.image.title?.lowercased().contains(searchText.lowercased()) ?? false)
-      }
-      
-        collectionView.reloadData()
     }
 }
