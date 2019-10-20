@@ -19,6 +19,7 @@
 		3664CDA32355DE2D00E408F3 /* SearchPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3664CDA22355DE2D00E408F3 /* SearchPhotoViewController.swift */; };
 		3667554A2358629D00B07D49 /* LoadImgurData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366755492358629D00B07D49 /* LoadImgurData.swift */; };
 		36675555235C656600B07D49 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36675554235C656600B07D49 /* UploadViewController.swift */; };
+		36675557235C88EA00B07D49 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36675556235C88EA00B07D49 /* Extensions.swift */; };
 		36A462AD234C76F8001EE34E /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A462AC234C76F8001EE34E /* Responses.swift */; };
 		36BA1DC023562EC6008767D7 /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA1DBF23562EC6008767D7 /* FavoriteTableViewController.swift */; };
 		36BA1DC223562EE5008767D7 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA1DC123562EE5008767D7 /* FavoriteTableViewCell.swift */; };
@@ -62,6 +63,7 @@
 		3664CDA22355DE2D00E408F3 /* SearchPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoViewController.swift; sourceTree = "<group>"; };
 		366755492358629D00B07D49 /* LoadImgurData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImgurData.swift; sourceTree = "<group>"; };
 		36675554235C656600B07D49 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		36675556235C88EA00B07D49 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		36A462AC234C76F8001EE34E /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Responses.swift; path = Epicture/Model/Responses.swift; sourceTree = SOURCE_ROOT; };
 		36BA1DBF23562EC6008767D7 /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
 		36BA1DC123562EE5008767D7 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				366755492358629D00B07D49 /* LoadImgurData.swift */,
+				36675556235C88EA00B07D49 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36BA1DC023562EC6008767D7 /* FavoriteTableViewController.swift in Sources */,
+				36675557235C88EA00B07D49 /* Extensions.swift in Sources */,
 				36675555235C656600B07D49 /* UploadViewController.swift in Sources */,
 				36BA1DC423562F01008767D7 /* FavoritePhotoViewController.swift in Sources */,
 				361818AD235323CC00EEF686 /* AuthViewController.swift in Sources */,
