@@ -17,6 +17,7 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    var postID: String = ""
     var isFavorite: Bool = true
     
     override func awakeFromNib() {
@@ -32,15 +33,18 @@ class FavoriteTableViewCell: UITableViewCell {
     
     //MARK: Actions
     @IBAction func handleFavorite(_ sender: UIButton) {
+        let client = ImgurAPIClient()
         //MARK: TODO Add to Favorites
         if isFavorite {
             isFavorite = false
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
             favoriteButton.tintColor = UIColor.label
+            _ = try! client.manageThisFavorite(id: postID)
         } else {
             isFavorite = true
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             favoriteButton.tintColor = UIColor.red
+            _ = try! client.manageThisFavorite(id: postID)
         }
     }
     

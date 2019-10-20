@@ -69,16 +69,19 @@ class SearchPhotoViewController: UIViewController {
     
     //MARK: Actions
     @IBAction func manageFavorite(_ sender: UIButton) {
-        //MARK: TODO Add to Favorite
+        let client = ImgurAPIClient()
         if isFavorite {
             isFavorite = false
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
             favoriteButton.tintColor = UIColor.label
+            _ = try! client.manageThisFavorite(id: post!.postID)
         } else {
             isFavorite = true
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             favoriteButton.tintColor = UIColor.red
+            _ = try! client.manageThisFavorite(id: post!.postID)
         }
+        loadFavoriteFromImgur()
     }
     
     /*

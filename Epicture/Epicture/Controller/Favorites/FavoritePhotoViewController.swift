@@ -18,7 +18,7 @@ class FavoritePhotoViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     
     var post: Post?
-    var isFavorite: Bool = true
+    var isFavorite: Bool = false
 
     var image: UIImage?
     var player: AVPlayer?
@@ -33,6 +33,22 @@ class FavoritePhotoViewController: UIViewController {
         authorLabel.text = post.image.account_url
         titleLabel.text = post.image.title
         commentLabel.text = post.image.description
+        
+        // Update Heart button if the image is in the user's favorite
+        let favIds = loadAllFavoriteID()
+    
+        for id in favIds {
+            if id == post.postID || id == post.image.id {
+                isFavorite = true
+                favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                favoriteButton.tintColor = UIColor.red
+                break
+            }
+        }
+        if isFavorite == false {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.tintColor = UIColor.label
+        }
         
         DispatchQueue.global(qos: .userInteractive).async {
             guard let type = post.image.type else {
@@ -64,23 +80,23 @@ class FavoritePhotoViewController: UIViewController {
                 }
             }
         }
-        //MARK: TODO manage button color
-        favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-        favoriteButton.tintColor = UIColor.red
     }
     
     @IBAction func manageFavorite(_ sender: UIButton) {
-        //MARK: TODO Add to Favorites
+        let client = ImgurAPIClient()
         if isFavorite {
             isFavorite = false
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
             favoriteButton.tintColor = UIColor.label
+            _ = try! client.manageThisFavorite(id: post!.postID)
         } else {
             isFavorite = true
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             favoriteButton.tintColor = UIColor.red
+            _ = try! client.manageThisFavorite(id: post!.postID)
         }
-    } 
+        loadFavoriteFromImgur()
+    }
 
     /*
     // MARK: - Navigation

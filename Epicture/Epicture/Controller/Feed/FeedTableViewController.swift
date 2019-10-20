@@ -38,6 +38,10 @@ class FeedTableViewController: UITableViewController {
       return searchController.isActive && !isSearchBarEmpty
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,7 +84,11 @@ class FeedTableViewController: UITableViewController {
         
         cell.titleLabel.text = post.image.title
         cell.commentLabel.text = post.image.description
-
+        cell.postID = post.postID
+        cell.imageID = post.image.id
+        
+        cell.updateHeart()
+        
         DispatchQueue.global(qos: .userInteractive).async {
             guard let link = post.image.link else {
                 print("[MyFeed] - A problem occured with post image link")

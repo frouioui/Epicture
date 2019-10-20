@@ -46,3 +46,19 @@ func loadImageFromUrl(link: String) -> UIImage {
     }
     return image
 }
+
+func loadAllFavoriteID() -> [String] {
+    let client = ImgurAPIClient()
+    var ids: [String] = []
+    
+    guard let username = UserDefaults.standard.string(forKey: "account_username") else {
+        print("[loadUserFeedFromImgur] - Empty username")
+        return ids
+    }
+    do {
+        ids = try client.getFavoritesID(username: username)
+    } catch let err {
+        print(err)
+    }
+    return ids
+}

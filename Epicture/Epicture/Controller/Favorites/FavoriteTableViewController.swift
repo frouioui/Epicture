@@ -37,6 +37,10 @@ class FavoriteTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,6 +66,7 @@ class FavoriteTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("toto")
         // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "FavoriteTableViewCell"
         
@@ -80,7 +85,8 @@ class FavoriteTableViewController: UITableViewController {
         cell.authorLabel.text = post.image.account_url
         cell.titleLabel.text = post.image.title
         cell.commentLabel.text = post.image.description
-
+        cell.postID = post.postID
+        
         DispatchQueue.global(qos: .userInteractive).async {
             guard let link = post.image.link else {
                 print("[Favorites] - A problem occured with post image link")
