@@ -29,11 +29,9 @@ class UploadViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Handle the text field’s user input through delegate callbacks.
         titleTextField.delegate = self
         descriptionTextField.delegate = self
-        
-        // Listen for keyboard events
+
         NotificationCenter.default.addObserver(self, selector: #selector(UploadViewController.keyboardWillChange(notification:)), name:
             UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(UploadViewController.keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -98,7 +96,6 @@ class UploadViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
     //MARK: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Hide the keyboard
         textField.resignFirstResponder()
         if self.titleTextField.text?.isEmpty == false && self.descriptionTextField.text?.isEmpty == false {
             self.addButton.isEnabled = true
