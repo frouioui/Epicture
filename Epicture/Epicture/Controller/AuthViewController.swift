@@ -15,37 +15,8 @@ class AuthViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func testAuth(_ sender: UIButton) {
-        print(UserDefaults.standard.string(forKey: "refresh_token") as Any)
-        print(UserDefaults.standard.string(forKey: "access_token") as Any)
-        print(UserDefaults.standard.string(forKey: "account_username") as Any)
-        print(UserDefaults.standard.string(forKey: "account_id") as Any)
-    }
-    
-    @IBAction func logout(_ sender: UIButton) {
-        UserDefaults.standard.set("", forKey: "refresh_token")
-        UserDefaults.standard.set("", forKey: "access_token")
-        UserDefaults.standard.set("", forKey: "account_username")
-        UserDefaults.standard.set("", forKey: "account_id")
-    }
-    
-    @IBAction func testAPI(_ sender: UIButton) {
-        print("get avatar")
-        let client = ImgurAPIClient()
 
-        do {
-            var avatar_url = try client.getVotesPost(postId: "GL6t82p")
-            print(avatar_url)
-            let res = try client.voteManagePost(postId: "GL6t82p", vote: VotePost.veto)
-            print(res)
-            avatar_url = try client.getVotesPost(postId: "GL6t82p")
-            print(avatar_url)
-        } catch let err {
-            print(err)
-        }
-    }
-
-    //MARK: Actions
+    //MARK: - Connect With Imgur
     @IBAction func connectWithImgur(_ sender: UIButton) {
         let client = ImgurAPIClient()
 

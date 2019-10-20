@@ -8,6 +8,8 @@
 
 import UIKit
 
+//MARK: - LoadFavoriteFromImgur
+
 func loadFavoriteFromImgur() {
     let client = ImgurAPIClient()
 
@@ -21,6 +23,8 @@ func loadFavoriteFromImgur() {
         print(err)
     }
 }
+
+//MARK: - LoadUserFeedFromImgur
 
 func loadUserFeedFromImgur() {
     let client = ImgurAPIClient()
@@ -36,13 +40,20 @@ func loadUserFeedFromImgur() {
     }
 }
 
-func loadImageFromUrl(link: String) -> UIImage {
-    var image = UIImage()
+//MARK: - LoadAllFavoriteID
 
-    if let url = URL(string: link) {
-        if let data = try? Data(contentsOf: url) {
-            image = UIImage(data: data)!
-        }
+func loadAllFavoriteID() -> [String] {
+    let client = ImgurAPIClient()
+    var ids: [String] = []
+    
+    guard let username = UserDefaults.standard.string(forKey: "account_username") else {
+        print("[loadUserFeedFromImgur] - Empty username")
+        return ids
     }
-    return image
+    do {
+        ids = try client.getFavoritesID(username: username)
+    } catch let err {
+        print(err)
+    }
+    return ids
 }

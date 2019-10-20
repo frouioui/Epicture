@@ -11,7 +11,8 @@ import AVKit
 
 class FeedPhotoViewController: UIViewController {
     
-    //MARK: Properties
+    //MARK: - Properties
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postView: UIView!
     @IBOutlet weak var commentLabel: UILabel!
@@ -23,6 +24,7 @@ class FeedPhotoViewController: UIViewController {
     var image: UIImage?
     var player: AVPlayer?
 
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +35,22 @@ class FeedPhotoViewController: UIViewController {
         titleLabel.text = post.image.title
         commentLabel.text = post.image.description
     
+        // Update Heart button if the image is in the user's favorite
+        let favIds = loadAllFavoriteID()
+        
+        for id in favIds {
+            if id == post.postID || id == post.image.id {
+                isFavorite = true
+                favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                favoriteButton.tintColor = UIColor.red
+                break
+            }
+        }
+        if isFavorite == false {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.tintColor = UIColor.label
+        }
+        
         DispatchQueue.global(qos: .userInteractive).async {
             guard let type = post.image.type else {
                 print("[MyFeedPhoto] - Empty image type")
@@ -66,28 +84,20 @@ class FeedPhotoViewController: UIViewController {
 
     }
 
-    //MARK: Actions
+    //MARK: - Manage Favorite
     @IBAction func addToFavorite(_ sender: UIButton) {
-        //MARK: TODO Add to Favorites
+        let client = ImgurAPIClient()
         if isFavorite {
             isFavorite = false
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
             favoriteButton.tintColor = UIColor.label
+            _ = try! client.manageThisFavorite(id: post!.postID)
         } else {
             isFavorite = true
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             favoriteButton.tintColor = UIColor.red
+            _ = try! client.manageThisFavorite(id: post!.postID)
         }
+        loadFavoriteFromImgur()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

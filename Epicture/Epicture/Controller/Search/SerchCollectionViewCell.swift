@@ -10,7 +10,8 @@ import UIKit
 
 class SearchCollectionViewCell: UICollectionViewCell {
 
-    //MARK: Properties
+    //MARK: - Properties
+
     @IBOutlet weak var postView: UIView!
     
 }

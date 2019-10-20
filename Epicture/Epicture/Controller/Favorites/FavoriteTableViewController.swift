@@ -20,6 +20,8 @@ var favoritePosts: [Post] = []
 
 class FavoriteTableViewController: UITableViewController {
 
+    // MARK: - Properties
+
     var filteredPosts: [Post] = []
 
     var imageView: UIImageView?
@@ -37,20 +39,26 @@ class FavoriteTableViewController: UITableViewController {
         return searchController.isActive && !isSearchBarEmpty
     }
 
+    // MARK: - ViewDidAppear
+
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
+    // MARK: - ViewDidLoad
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // MARK: Add Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
 
-    // MARK: - Table view data source
+    // MARK: - Table View Data Source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // Return the number of sections
         return 1
     }
 
@@ -62,14 +70,12 @@ class FavoriteTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "FavoriteTableViewCell"
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FavoriteTableViewCell  else {
             fatalError("The dequeued cell is not an instance of FavoriteTableViewCell.")
         }
-        
-        // Fetches the appropriate photo for the data source layout.
+
         let post: Post
         if isFiltering {
             post = filteredPosts[indexPath.row]
@@ -80,7 +86,8 @@ class FavoriteTableViewController: UITableViewController {
         cell.authorLabel.text = post.image.account_url
         cell.titleLabel.text = post.image.title
         cell.commentLabel.text = post.image.description
-
+        cell.postID = post.postID
+        
         DispatchQueue.global(qos: .userInteractive).async {
             guard let link = post.image.link else {
                 print("[Favorites] - A problem occured with post image link")
@@ -94,7 +101,7 @@ class FavoriteTableViewController: UITableViewController {
                 print("[Favorites] - Empty image type")
                 return
             }
-            if type.contains("image/jpg") || type.contains("image/jpeg") {
+            if type.contains("image/png") || type.contains("image/jpg") || type.contains("image/jpeg") {
                 guard let data = try? Data(contentsOf: url) else {
                     print("[Favorites] - A problem occured on data conversion")
                     return
@@ -141,7 +148,6 @@ class FavoriteTableViewController: UITableViewController {
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -174,7 +180,7 @@ class FavoriteTableViewController: UITableViewController {
         }
     }
     
-    //MARK: Private Methods
+    //MARK: - Filter Content
     private func filterContentForSearchText(_ searchText: String) {
       filteredPosts = favoritePosts.filter { (posts: Post) -> Bool in
         return (posts.image.title?.lowercased().contains(searchText.lowercased()) ?? false)

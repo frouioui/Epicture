@@ -20,7 +20,8 @@ var userPosts: [Post] = []
 
 class FeedTableViewController: UITableViewController {
 
-    //MARK: Properties
+    //MARK: - Properties
+
     var filteredPosts: [Post] = []
 
     var imageView: UIImageView?
@@ -37,7 +38,15 @@ class FeedTableViewController: UITableViewController {
     var isFiltering: Bool {
       return searchController.isActive && !isSearchBarEmpty
     }
+
+    // MARK: - ViewDidAppear
+
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
+    // MARK: - ViewDidLoad
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,7 +57,7 @@ class FeedTableViewController: UITableViewController {
         definesPresentationContext = true
     }
 
-    // MARK: - Table view data source
+    // MARK: - Table View Data Source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -63,14 +72,12 @@ class FeedTableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "FeedTableViewCell"
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FeedTableViewCell  else {
             fatalError("The dequeued cell is not an instance of PhotoTableViewCell.")
         }
         
-        // Fetches the appropriate meal for the data source layout.
         let post: Post
         if isFiltering {
             post = filteredPosts[indexPath.row]
@@ -80,6 +87,8 @@ class FeedTableViewController: UITableViewController {
         
         cell.titleLabel.text = post.image.title
         cell.commentLabel.text = post.image.description
+        cell.postID = post.postID
+        cell.imageID = post.image.id
 
         DispatchQueue.global(qos: .userInteractive).async {
             guard let link = post.image.link else {
@@ -94,7 +103,7 @@ class FeedTableViewController: UITableViewController {
                 print("[MyFedd] - Empty image type")
                 return
             }
-            if type.contains("image/jpg") || type.contains("image/jpeg") {
+            if type.contains("image/png") || type.contains("image/jpg") || type.contains("image/jpeg") {
                 guard let data = try? Data(contentsOf: url) else {
                     print("[MyFeed] - A problem occured on data conversion")
                     return
@@ -175,7 +184,8 @@ class FeedTableViewController: UITableViewController {
         
     }
     
-    //MARK: Private Methods
+    //MARK: - Filter Content
+
     private func filterContentForSearchText(_ searchText: String) {
       filteredPosts = userPosts.filter { (posts: Post) -> Bool in
         return (posts.image.title?.lowercased().contains(searchText.lowercased()) ?? false)
