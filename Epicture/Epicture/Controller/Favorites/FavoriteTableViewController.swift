@@ -33,10 +33,9 @@ class FavoriteTableViewController: UITableViewController {
       return searchController.searchBar.text?.isEmpty ?? true
     }
 
-    var isSearching: Bool {
+    var isFiltering: Bool {
         return searchController.isActive && !isSearchBarEmpty
     }
-    var isFiltering: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +55,7 @@ class FavoriteTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering || isSearching {
+        if isFiltering {
             return filteredPosts.count
         }
         return favoritePosts.count
@@ -72,11 +71,12 @@ class FavoriteTableViewController: UITableViewController {
         
         // Fetches the appropriate photo for the data source layout.
         let post: Post
-        if isFiltering || isSearching {
+        if isFiltering {
             post = filteredPosts[indexPath.row]
         } else {
             post = favoritePosts[indexPath.row]
         }
+
         cell.authorLabel.text = post.image.account_url
         cell.titleLabel.text = post.image.title
         cell.commentLabel.text = post.image.description
@@ -161,7 +161,7 @@ class FavoriteTableViewController: UITableViewController {
 
             let selectedPost: Post
 
-            if isFiltering || isSearching {
+            if isFiltering {
                 selectedPost = filteredPosts[indexPath.row]
             } else {
                 selectedPost = favoritePosts[indexPath.row]
