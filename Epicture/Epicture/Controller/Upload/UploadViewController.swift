@@ -129,6 +129,7 @@ class UploadViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
     //MARK: Add Post To Imgur
     @IBAction func addPostToImgur(_ sender: UIBarButtonItem) {
+        let client = ImgurAPIClient()
         
         guard let image = selectedImage else {
             print("[Upload] - No selected image")
@@ -141,8 +142,8 @@ class UploadViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
         let description = self.descriptionTextField.text
         //MARK: FLO, C'EST LA AUE TU FAIS TES BAILS
-//       j'imagine que ton prototype de fonction sera : func function(base64: String, tile: String?, description: String?) : a voir si le titre et la description peuvent etre nuls
-
+        _ = try! client.uploadPhoto(photoBase64: imageBase64, title: title, description: description)
+    
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
 
