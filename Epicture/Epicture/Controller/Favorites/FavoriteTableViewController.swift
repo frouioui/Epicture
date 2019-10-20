@@ -20,8 +20,6 @@ var favoritePosts: [Post] = []
 
 class FavoriteTableViewController: UITableViewController {
 
-    //MARK: Properties
-//    var posts: [Post] = []
     var filteredPosts: [Post] = []
 
     var imageView: UIImageView?
@@ -35,14 +33,13 @@ class FavoriteTableViewController: UITableViewController {
       return searchController.searchBar.text?.isEmpty ?? true
     }
 
-    var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
+    var isSearching: Bool {
+        return searchController.isActive && !isSearchBarEmpty
     }
+    var isFiltering: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        posts = favoritePosts
 
         // MARK: Add Search Controller
         searchController.searchResultsUpdater = self
@@ -59,8 +56,7 @@ class FavoriteTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows
-        if isFiltering {
+        if isFiltering || isSearching {
             return filteredPosts.count
         }
         return favoritePosts.count
@@ -76,7 +72,7 @@ class FavoriteTableViewController: UITableViewController {
         
         // Fetches the appropriate photo for the data source layout.
         let post: Post
-        if isFiltering {
+        if isFiltering || isSearching {
             post = filteredPosts[indexPath.row]
         } else {
             post = favoritePosts[indexPath.row]
@@ -165,7 +161,7 @@ class FavoriteTableViewController: UITableViewController {
 
             let selectedPost: Post
 
-            if isFiltering {
+            if isFiltering || isSearching {
                 selectedPost = filteredPosts[indexPath.row]
             } else {
                 selectedPost = favoritePosts[indexPath.row]
@@ -177,7 +173,7 @@ class FavoriteTableViewController: UITableViewController {
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
     }
-
+    
     //MARK: Private Methods
     private func filterContentForSearchText(_ searchText: String) {
       filteredPosts = favoritePosts.filter { (posts: Post) -> Bool in

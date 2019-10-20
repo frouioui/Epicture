@@ -21,7 +21,6 @@ var userPosts: [Post] = []
 class FeedTableViewController: UITableViewController {
 
     //MARK: Properties
-//    var posts = [Post]()
     var filteredPosts: [Post] = []
 
     var imageView: UIImageView?
@@ -41,9 +40,6 @@ class FeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Asign user posts
-//        posts = userPosts
 
         // Add Search Controller in Navigation Bar
         searchController.searchResultsUpdater = self

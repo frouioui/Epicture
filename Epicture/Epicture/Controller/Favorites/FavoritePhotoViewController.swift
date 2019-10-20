@@ -64,6 +64,7 @@ class FavoritePhotoViewController: UIViewController {
                 }
             }
         }
+        //MARK: TODO manage button color
         favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         favoriteButton.tintColor = UIColor.red
     }
