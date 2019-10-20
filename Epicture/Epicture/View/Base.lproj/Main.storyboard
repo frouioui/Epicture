@@ -320,7 +320,7 @@
             </objects>
             <point key="canvasLocation" x="3478" y="1221"/>
         </scene>
-        <!--Search-->
+        <!--Search Collection View Controller-->
         <scene sceneID="I5C-vT-frK">
             <objects>
                 <collectionViewController id="0ab-C9-TQR" customClass="SearchCollectionViewController" customModule="Epicture" customModuleProvider="target" sceneMemberID="viewController">
@@ -342,15 +342,21 @@
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="DefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Xe6-E1-QRh">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOG-JY-Gi3">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="EOG-JY-Gi3" secondAttribute="trailing" id="Dhy-Uz-AOW"/>
+                                        <constraint firstAttribute="bottom" secondItem="EOG-JY-Gi3" secondAttribute="bottom" id="Hk1-yB-KNg"/>
+                                        <constraint firstItem="EOG-JY-Gi3" firstAttribute="leading" secondItem="V6g-bb-9lp" secondAttribute="leading" id="iQb-tB-Qxo"/>
+                                        <constraint firstItem="EOG-JY-Gi3" firstAttribute="top" secondItem="V6g-bb-9lp" secondAttribute="top" id="vye-4F-XRV"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="150" height="150"/>
                                 <connections>
-                                    <outlet property="photoImageView" destination="Xe6-E1-QRh" id="2gN-Mc-CBv"/>
+                                    <outlet property="postView" destination="EOG-JY-Gi3" id="DgX-tn-nIa"/>
                                     <segue destination="bZW-c3-Pbe" kind="show" identifier="SearchShowDetail" id="kh5-vs-IP0"/>
                                 </connections>
                             </collectionViewCell>
@@ -360,7 +366,25 @@
                             <outlet property="delegate" destination="0ab-C9-TQR" id="kHg-7T-K1v"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Search" id="5Nf-HI-NuK"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="5Nf-HI-NuK">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="4" id="1nD-sa-7tK">
+                            <rect key="frame" x="60" y="5.6666666666666679" width="294" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Year"/>
+                                <segment title="Month"/>
+                                <segment title="Week"/>
+                                <segment title="Day"/>
+                                <segment title="All"/>
+                            </segments>
+                            <connections>
+                                <action selector="filterContent:" destination="0ab-C9-TQR" eventType="valueChanged" id="1Jd-3g-UhY"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentControl" destination="1nD-sa-7tK" id="Ae8-SR-yvh"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uia-Rd-A0g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -389,13 +413,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="554-aa-ne1">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QwP-vt-Icm">
                                         <rect key="frame" x="0.0" y="64" width="414" height="414"/>
-                                        <gestureRecognizers/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="554-aa-ne1" secondAttribute="height" multiplier="1:1" id="2wC-ar-LZY"/>
+                                            <constraint firstAttribute="width" secondItem="QwP-vt-Icm" secondAttribute="height" multiplier="1:1" id="kDK-Fu-jOG"/>
                                         </constraints>
-                                    </imageView>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="53" translatesAutoresizingMaskIntoConstraints="NO" id="Bju-Zl-3Z7">
                                         <rect key="frame" x="20" y="483" width="374" height="30"/>
                                         <subviews>
@@ -424,11 +448,11 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Bdj-i7-JEU" secondAttribute="trailing" constant="10" id="0Jp-g1-tqt"/>
-                                    <constraint firstAttribute="trailing" secondItem="554-aa-ne1" secondAttribute="trailing" id="6gL-rb-eYY"/>
                                     <constraint firstItem="Bju-Zl-3Z7" firstAttribute="leading" secondItem="Pvh-CU-o9j" secondAttribute="leading" constant="20" id="DG6-At-AwE"/>
                                     <constraint firstAttribute="trailing" secondItem="kP8-A7-aaD" secondAttribute="trailing" id="Fp5-QS-z9G"/>
+                                    <constraint firstAttribute="trailing" secondItem="QwP-vt-Icm" secondAttribute="trailing" id="flD-KZ-kgY"/>
+                                    <constraint firstItem="QwP-vt-Icm" firstAttribute="leading" secondItem="Pvh-CU-o9j" secondAttribute="leading" id="je1-m9-L1R"/>
                                     <constraint firstAttribute="trailing" secondItem="Bju-Zl-3Z7" secondAttribute="trailing" constant="20" id="oLu-mF-rMP"/>
-                                    <constraint firstItem="554-aa-ne1" firstAttribute="leading" secondItem="Pvh-CU-o9j" secondAttribute="leading" id="q0h-aM-qK5"/>
                                     <constraint firstAttribute="bottom" secondItem="Bju-Zl-3Z7" secondAttribute="bottom" id="rfM-0j-fvF"/>
                                     <constraint firstItem="Bdj-i7-JEU" firstAttribute="leading" secondItem="Pvh-CU-o9j" secondAttribute="leading" constant="10" id="wzZ-eU-tVY"/>
                                     <constraint firstItem="kP8-A7-aaD" firstAttribute="leading" secondItem="Pvh-CU-o9j" secondAttribute="leading" id="x4b-Hh-kr0"/>
@@ -443,12 +467,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xxQ-lw-1B8"/>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="fin-ie-qcJ"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="fin-ie-qcJ"/>
                     <connections>
                         <outlet property="authorLabel" destination="Bdj-i7-JEU" id="VRU-Gf-eJJ"/>
                         <outlet property="commentLabel" destination="czU-CS-LMU" id="eh1-ax-YCR"/>
                         <outlet property="favoriteButton" destination="bdt-Id-O9K" id="9Gc-Ef-0fU"/>
-                        <outlet property="photoImageView" destination="554-aa-ne1" id="UlA-fa-gzp"/>
+                        <outlet property="postView" destination="QwP-vt-Icm" id="6Nh-mr-kDe"/>
                         <outlet property="titleLabel" destination="kP8-A7-aaD" id="aNj-At-Sbo"/>
                     </connections>
                 </viewController>
@@ -684,8 +708,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F8x-fQ-Pvk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="magnifyingglass" catalog="system" id="Vdn-TO-7UP"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="1UV-ZG-mVN">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1UV-ZG-mVN">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -718,7 +742,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DefaultPhoto" width="360" height="360"/>
         <image name="heart" catalog="system" width="64" height="58"/>
         <image name="heart.fill" catalog="system" width="64" height="58"/>
         <image name="house" catalog="system" width="64" height="54"/>

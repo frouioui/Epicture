@@ -20,8 +20,6 @@ var favoritePosts: [Post] = []
 
 class FavoriteTableViewController: UITableViewController {
 
-    //MARK: Properties
-//    var posts: [Post] = []
     var filteredPosts: [Post] = []
 
     var imageView: UIImageView?
@@ -36,13 +34,11 @@ class FavoriteTableViewController: UITableViewController {
     }
 
     var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
+        return searchController.isActive && !isSearchBarEmpty
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        posts = favoritePosts
 
         // MARK: Add Search Controller
         searchController.searchResultsUpdater = self
@@ -59,7 +55,6 @@ class FavoriteTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows
         if isFiltering {
             return filteredPosts.count
         }
@@ -81,6 +76,7 @@ class FavoriteTableViewController: UITableViewController {
         } else {
             post = favoritePosts[indexPath.row]
         }
+
         cell.authorLabel.text = post.image.account_url
         cell.titleLabel.text = post.image.title
         cell.commentLabel.text = post.image.description
@@ -177,7 +173,7 @@ class FavoriteTableViewController: UITableViewController {
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
     }
-
+    
     //MARK: Private Methods
     private func filterContentForSearchText(_ searchText: String) {
       filteredPosts = favoritePosts.filter { (posts: Post) -> Bool in

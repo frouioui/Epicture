@@ -11,6 +11,6 @@ import UIKit
 class SearchCollectionViewCell: UICollectionViewCell {
 
     //MARK: Properties
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var postView: UIView!
     
 }

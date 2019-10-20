@@ -7,47 +7,75 @@
 //
 
 import UIKit
+import AVKit
 
 class SearchPhotoViewController: UIViewController {
 
     //MARK: Properties
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var postView: UIView!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    var photo: Photo?
+    var post: Post?
+    var isFavorite: Bool = true
+
+    var image: UIImage?
+    var player: AVPlayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let photo = photo else {
+        guard let post = post else {
             return
         }
-        navigationItem.title = photo.author
-        authorLabel.text = photo.author
-        titleLabel.text = photo.title
-        commentLabel.text = photo.comment
-        photoImageView.image = photo.photo
-        if photo.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            favoriteButton.tintColor = UIColor.red
+        navigationItem.title = post.image.title
+        authorLabel.text = post.image.account_url
+        titleLabel.text = post.image.title
+        commentLabel.text = post.image.description
+
+        DispatchQueue.global(qos: .userInteractive).async {
+            guard let type = post.image.type else {
+                print("[FavoritePhoto] - Empty image type")
+                return
+            }
+            if type.contains("image/jpg") || type.contains("image/jpeg") {
+                guard let image = self.image else {
+                    print("[FavoritePhoto] - A problem occured on image transfert")
+                    return
+                }
+                DispatchQueue.main.async {
+                    let imageView = UIImageView(image: image)
+                    imageView.contentMode = UIView.ContentMode.scaleAspectFit
+                    imageView.frame = self.postView.bounds
+                    self.postView.addSubview(imageView)
+                }
+            } else if type.contains("/mp4") || type.contains("/avi") {
+                guard let player = self.player else {
+                    print("[FavoritePhoto] - A problem occured on video transfert")
+                    return
+                }
+                DispatchQueue.main.async {
+                    let playerLayer = AVPlayerLayer(player: player)
+                    playerLayer.frame = self.postView.bounds
+                    playerLayer.videoGravity = AVLayerVideoGravity.resize
+                    self.postView.layer.addSublayer(playerLayer)
+                    player.play()
+                }
+            }
         }
     }
     
     //MARK: Actions
     @IBAction func manageFavorite(_ sender: UIButton) {
         //MARK: TODO Add to Favorite
-        guard let photo = photo else {
-            return
-        }
-        if photo.favorite {
-            photo.favorite = false
+        if isFavorite {
+            isFavorite = false
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
             favoriteButton.tintColor = UIColor.label
         } else {
-            photo.favorite = true
+            isFavorite = true
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             favoriteButton.tintColor = UIColor.red
         }
