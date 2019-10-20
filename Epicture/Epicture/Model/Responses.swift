@@ -8,9 +8,39 @@
 
 import Foundation
 
-struct User: Codable {
-    
+//MARK: Upload Image
+struct ErrorResponseUpload: Codable {
+    struct Err: Codable {
+        var message: String = ""
+    }
+    var error: Err
 }
+
+struct UploadResponseError: Codable {
+    var data: ErrorResponseUpload
+}
+
+struct UploadImage: Codable {
+    var image: String = ""
+    var type: String = "base64"
+    var title: String = ""
+    var description: String = ""
+}
+
+struct UploadedImage: Codable {
+    var image: String = ""
+    var type: String = "base64"
+    var title: String = ""
+    var description: String = ""
+}
+
+struct ResponseUploadImage: Codable {
+    struct DataResp: Codable {
+        var id: String = ""
+    }
+    var data: DataResp
+}
+
 
 //MARK: Votes
 enum VotePost : String {
@@ -202,15 +232,18 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse,
                 (200...299).contains(httpResponse.statusCode) else {
                 self.handleAPIError(resp: response!)
+                    done = true
                 return
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -242,14 +275,17 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
                 self.handleAPIError(resp: response!)
+                done = true
                 return
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -317,15 +353,18 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 self.handleAPIError(resp: response!)
+                    done = true
                 return
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -345,7 +384,7 @@ public class ImgurAPIClient {
         var pageImage = [Image]()
         var done = false
           
-        guard let url = URL(string: "https://api.imgur.com/3/account/" + username + "/submissions/\(page)") else {
+        guard let url = URL(string: "https://api.imgur.com/3/account/" + username + "/images/\(page)") else {
             throw ImgurError.invalidURL
         }
 
@@ -357,14 +396,17 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
                 self.handleAPIError(resp: response!)
+                done = true
                 return
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -410,14 +452,17 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
                 self.handleAPIError(resp: response!)
+                done = true
                 return
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -486,14 +531,17 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) || httpResponse.statusCode == 404 else{
                 self.handleAPIError(resp: response!)
+                done = true
                 return
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -529,14 +577,17 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) || httpResponse.statusCode == 404 else{
                 self.handleAPIError(resp: response!)
+                done = true
                 return
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -582,6 +633,7 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
@@ -591,6 +643,7 @@ public class ImgurAPIClient {
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -622,14 +675,17 @@ public class ImgurAPIClient {
         let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             if error != nil || data == nil {
                 self.handleClientError(err: error!)
+                done = true
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
                 self.handleAPIError(resp: response!)
+                done = true
                 return
             }
             guard let mime = response?.mimeType, mime == "application/json" else {
                 print("Wrong MIME type!")
+                done = true
                 return
             }
 
@@ -643,4 +699,52 @@ public class ImgurAPIClient {
         return voteManageData
     }
 
+    //MARK: uploadPhoto
+    func uploadPhoto(photoBase64: String, title: String?, description: String?) throws -> String {
+        let session = URLSession.shared
+        var uploadedData = ResponseUploadImage.DataResp()
+        var done = false
+
+        guard let url = URL(string: "https://api.imgur.com/3/upload") else {
+            throw ImgurError.invalidURL
+        }
+        
+        let jsonObject: [String: Any] = [
+            "image": photoBase64,
+            "title": title as Any,
+            "description": description as Any
+        ]
+
+        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval:500000)
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = try JSONSerialization.data(withJSONObject: jsonObject, options: JSONSerialization.WritingOptions())
+        
+        try self.setAuthBearerHeader(urlRequest: &urlRequest)
+
+        let task = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
+            if error != nil || data == nil {
+                self.handleClientError(err: error!)
+                done = true
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else{
+                self.handleAPIError(resp: response!)
+                done = true
+                return
+            }
+            guard let mime = response?.mimeType, mime == "application/json" else {
+                print("Wrong MIME type!")
+                done = true
+                return
+            }
+
+            let uploadResp = try! JSONDecoder().decode(ResponseUploadImage.self, from: data!)
+            uploadedData = uploadResp.data
+            done = true
+        })
+        task.resume()
+        while (done == false) {}
+        return uploadedData.id
+    }
 }
