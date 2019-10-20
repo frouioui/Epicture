@@ -54,19 +54,23 @@ $ open Epicture/Epicture.xcodeproj
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+We have a small dozen of tests.
+
+These tests are testing the wrapper of the Imgur API.
 
 ```
-Give an example
+    func testGetAvatarImgur() {
+        let client = ImgurAPIClient()
+        
+        UserDefaults.standard.set("6535674d8df6bef15f43f04b168ee1bbdc6e2f79", forKey: "access_token")
+        let url = try! client.getAvatar(username: "testfouioui")
+        
+        XCTAssertEqual(url, "https://imgur.com/user/testfouioui/avatar?maxwidth=290")
+    }
 ```
 
-### And coding style tests
+This function test that the Avatar is correct for example.
 
-Explain what these tests test and why
-
-```
-Give an example
-```
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
@@ -107,7 +111,7 @@ $ open Storyboard/Epicture.sketch
 
 ### Architectural documentation
 
-You can find the architectural documentation [here]()
+You can find the architectural documentation [here](https://github.com/frouioui/Epicture/tree/master/doc)
 
 ## Authors
 
