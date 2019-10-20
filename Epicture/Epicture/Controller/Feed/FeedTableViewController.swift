@@ -86,9 +86,7 @@ class FeedTableViewController: UITableViewController {
         cell.commentLabel.text = post.image.description
         cell.postID = post.postID
         cell.imageID = post.image.id
-        
-        cell.updateHeart()
-        
+
         DispatchQueue.global(qos: .userInteractive).async {
             guard let link = post.image.link else {
                 print("[MyFeed] - A problem occured with post image link")
