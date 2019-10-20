@@ -12,13 +12,18 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        _ = UserDefaults.init()
         // Override point for customization after application launch.
         return true
     }
+    
+    func application(_ application: UIApplication, didFinishLaunching launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+         _ = UserDefaults.init()
 
+        // Override point for customization after application launch.
+        return true
+    }
 
     // MARK: UISceneSession Lifecycle
 
